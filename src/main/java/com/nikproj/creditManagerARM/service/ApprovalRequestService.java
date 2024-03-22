@@ -20,7 +20,7 @@ public class ApprovalRequestService {
 
     private CreditRequestDAOInterface creditRequestDAO;
     private ContractDAOInterface contractDAO;
-
+    
     @Autowired
     public ApprovalRequestService(
             CreditRequestDAOInterface creditRequestDAO,
@@ -55,7 +55,6 @@ public class ApprovalRequestService {
 
     private void generateContractForRequest(Long requestId) {
         ContractModel contract = new ContractModel();
-//        contract
     }
 
 }

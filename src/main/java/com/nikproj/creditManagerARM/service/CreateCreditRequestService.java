@@ -9,7 +9,6 @@ import com.nikproj.creditManagerARM.model.CreditRequestModel;
 import com.nikproj.creditManagerARM.model.RequestFormModel;
 import com.nikproj.creditManagerARM.model.UserModel;
 import com.nikproj.creditManagerARM.repository.CreditRequestDAOInterface;
-import com.nikproj.creditManagerARM.repository.Impl.CreditRequestDAO;
 import com.nikproj.creditManagerARM.repository.UserDAOInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

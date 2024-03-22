@@ -17,6 +17,7 @@ public class ContractDAO implements ContractDAOInterface{
 
     @Override
     public Long saveContract(ContractModel model) {
+        
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

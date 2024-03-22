@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.util.Date;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -18,6 +19,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "contracts")
+@NoArgsConstructor
 public class ContractModel {
     
     @Id
