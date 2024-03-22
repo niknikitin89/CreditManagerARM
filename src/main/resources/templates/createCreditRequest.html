@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymleaf.org">
+    <head>
+        <title>createCreditApp</title>
+    </head>
+    <body>
+        <h1>Создание заявки на кредит</h1>
+        <form method="POST" th:object="${request}">
+            <h3>Данные пользователя</h3>
+            <label for="user.firstName">Имя</label>
+            <input type="text" th:field="*{user.firstName}"/>
+            <br/>
+
+            <label for="user.lastName">Фамилия</label>
+            <input type="text" th:field="*{user.lastName}"/>
+            <br/>
+            
+            <label for="user.lastName">Отчество</label>
+            <input type="text" th:field="*{user.patronymic}"/>
+            <br/>
+            
+            <label for="user.passportSeria">Серия паспорта</label>
+            <input type="text" th:field="*{user.passportSeria}"/>
+            <br/>
+
+            <label for="user.passportNumber">Номер паспорта</label>
+            <input type="text" th:field="*{user.passportNumber}"/>
+            <br/>
+
+            <label for="user.lastName">Семейное положение</label>
+            <input type="text" th:field="*{user.familyStatus}"/>
+            <br/>
+            
+            <label for="user.lastName">Адрес</label>
+            <input type="text" th:field="*{user.address}"/>
+            <br/>
+            
+            <label for="user.lastName">Телефон</label>
+            <input type="text" th:field="*{user.phone}"/>
+            <br/>
+            
+            <h3>Данные о кредите</h3>
+            <label for="request.requestedSum">Запрашиваемая сумма</label>
+            <input type="number" th:field="*{request.requestedSum}"/>
+            <br/>
+            
+            <input type="submit" value="Подать заявку"/>
+        </form>
+    </body>
+</html>
