@@ -12,10 +12,27 @@ import org.springframework.stereotype.Component;
  *
  * @author user
  */
-@Data
 @NoArgsConstructor
 @Component
 public class RequestFormModel {
     private UserModel user;
     private CreditRequestModel request;
+
+    public UserModel getUser() {
+        return user;
+    }
+
+    public CreditRequestModel getRequest() {
+        return request;
+    }
+
+    public void setUser(UserModel user) {
+        this.user = user;
+    }
+
+    public void setRequest(CreditRequestModel request) {
+        this.request = request;
+    }
+    
+    
 }

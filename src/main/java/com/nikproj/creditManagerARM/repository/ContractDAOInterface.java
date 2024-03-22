@@ -5,6 +5,7 @@
 package com.nikproj.creditManagerARM.repository;
 
 import com.nikproj.creditManagerARM.model.ContractModel;
+import com.nikproj.creditManagerARM.model.ContractViewForm;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -17,4 +18,5 @@ public interface ContractDAOInterface {
     ContractModel findById(Long id);
 
     public void updateContract(ContractModel model);
+    public ContractViewForm getFullContractInfoByRequestId(Long requestId);
 }

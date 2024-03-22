@@ -15,7 +15,6 @@ import lombok.Data;
  *
  * @author user
  */
-@Data
 @Entity
 @Table(name = "users")
 public class UserModel {
@@ -36,4 +35,79 @@ public class UserModel {
     public enum FamilyStatus {
         FREE, MARRIED
     }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPatronymic() {
+        return patronymic;
+    }
+
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+    }
+
+    public Integer getPassportSeria() {
+        return passportSeria;
+    }
+
+    public void setPassportSeria(Integer passportSeria) {
+        this.passportSeria = passportSeria;
+    }
+
+    public Integer getPassportNumber() {
+        return passportNumber;
+    }
+
+    public void setPassportNumber(Integer passportNumber) {
+        this.passportNumber = passportNumber;
+    }
+
+    public FamilyStatus getFamilyStatus() {
+        return familyStatus;
+    }
+
+    public void setFamilyStatus(FamilyStatus familyStatus) {
+        this.familyStatus = familyStatus;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+    
+    
+    
 }

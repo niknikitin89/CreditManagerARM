@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
  *
  * @author user
  */
 @Controller
+@SessionAttributes("request")
 @RequestMapping("/cmarm/create_credit_request")
 public class CreateCreditRequestController {
 
@@ -47,14 +49,19 @@ public class CreateCreditRequestController {
     }
 
     @PostMapping//("/new_app")
-    public String createNewCreditRequest(RequestFormModel model) {
+    public String createNewCreditRequest(@ModelAttribute(name = "request" ) RequestFormModel model) {
         System.out.println(model.toString());
+        //Сохранение запроса
         Long requestId = createRequestService.saveRequest(model);
+//        model.getRequest().setId(requestId);
+        
+        //Отправка запроса на одобрение
         CreditRequestModel.Status approveStatus = 
                 approvalRequestService.approveRequest(requestId);
         
         if(approveStatus == CreditRequestModel.Status.APPROVED){
-            return "redirect:/cmarm/request_approved";
+            return "redirect:/cmarm/contract";
+//                     "/cmarm/request_approved";
         }else{
             return "redirect:/cmarm/request_rejected";
         }

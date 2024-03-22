@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymleaf.org">
+    <head>
+        <title>createCreditApp</title>
+    </head>
+    <body>
+        <h1>Договор</h1>
+        <form method="POST" th:object="${contract}">
+            <p>Номер договора - <span th:text="*{id}">123456</span></p>
+            <p>Дата договора - <span th:text="*{contractDate}">01.01.2020</span></p>
+            <p>Одобренная сумма - <span th:text="*{approvedSum}">1000</span></p>
+            <p>Срок кредита - <span th:text="*{creditTerm}">12</span> месяцев</p>
+            <p>ФИО получателя - <span th:text="*{lastName}">Иванов</span>
+               <span th:text="*{firstName}">Иван</span>
+               <span th:text="*{patronymic}">Иванович</span></p>
+            <p>Паспорт - <span th:text="*{passportSeria}">1809</span> 
+                <span th:text="*{passportNumber}">180909</span></p>
+            <p>Семейное положение - <span th:text="*{familyStatus}">Женат</span></p>
+            <p>Адресс - <span th:text="*{address}">Волгоград</span></p>
+            <p>Телефон - <span th:text="*{phone}">89991112233</span></p>
+            <br/>
+
+            <input type="submit" value="Подписать" name = "sign"/>
+            <input type="submit" value="Отказ" name = "cancel"/>
+        </form>
+    </body>
+</html>

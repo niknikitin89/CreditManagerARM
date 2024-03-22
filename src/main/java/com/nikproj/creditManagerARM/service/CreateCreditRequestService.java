@@ -19,36 +19,37 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CreateCreditRequestService {
-
+    
     private final UserDAOInterface userDAO;
     private final CreditRequestDAOInterface creditRequestDAO;
-
+    
     @Autowired
     public CreateCreditRequestService(UserDAOInterface userDAO, CreditRequestDAOInterface creditRequestDAO) {
         this.userDAO = userDAO;
         this.creditRequestDAO = creditRequestDAO;
     }
-
+    
     public Long saveRequest(RequestFormModel model) {
         //Сохраняем пользователя
         UserModel user = model.getUser();
         Long userID = userDAO.saveUser(user);
-        if (userID < 0 ) {
+        if (userID < 0) {
             System.err.println(Constants.ERR_SAVE_DATABASE);
             return Long.valueOf(-1);
         }
-        
+
         //Сохраняем информацию по заявке
         CreditRequestModel request = model.getRequest();
-        request.setUserId(userID);
+//        request.setUserId(userID);
+        request.setUser(user);
         request.setRequestStatus(CreditRequestModel.Status.WAIT);
         Long requestID = creditRequestDAO.saveCreditRequest(request);
-        if (requestID < 0 ) {
+        if (requestID < 0) {
             System.err.println(Constants.ERR_SAVE_DATABASE);
             return Long.valueOf(-1);
         }
         
         return requestID;
     }
-
+    
 }

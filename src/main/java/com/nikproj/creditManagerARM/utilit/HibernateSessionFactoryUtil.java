@@ -5,6 +5,7 @@
 package com.nikproj.creditManagerARM.utilit;
 
 //import org.hibernate.SessionFactory;
+import com.nikproj.creditManagerARM.model.ApprovedRequestModel;
 import com.nikproj.creditManagerARM.model.ContractModel;
 import com.nikproj.creditManagerARM.model.CreditRequestModel;
 import com.nikproj.creditManagerARM.model.UserModel;
@@ -38,6 +39,7 @@ public class HibernateSessionFactoryUtil {
             configuration.addAnnotatedClass(UserModel.class);
             configuration.addAnnotatedClass(CreditRequestModel.class);
             configuration.addAnnotatedClass(ContractModel.class);
+            configuration.addAnnotatedClass(ApprovedRequestModel.class);
             StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
             return configuration.buildSessionFactory(builder.build());
         } catch (Exception e) {
