@@ -6,11 +6,14 @@ package com.nikproj.creditManagerARM.repository.Impl;
 
 import com.nikproj.creditManagerARM.model.ApprovedRequestModel;
 import com.nikproj.creditManagerARM.model.ContractModel;
+import com.nikproj.creditManagerARM.model.ContractReportViewForm;
 import com.nikproj.creditManagerARM.model.ContractViewForm;
 import com.nikproj.creditManagerARM.model.CreditRequestModel;
+import com.nikproj.creditManagerARM.model.RequestFullModel;
 import com.nikproj.creditManagerARM.model.UserModel;
 import com.nikproj.creditManagerARM.repository.ContractDAOInterface;
 import com.nikproj.creditManagerARM.utilit.HibernateSessionFactoryUtil;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -81,6 +84,7 @@ public class ContractDAO implements ContractDAOInterface {
 
             contract.setId(contractModel.getId());
             contract.setContractDate(contractModel.getContractDate());
+            contract.setRequestId(creditRequest.getId());
             contract.setApprovedSum(approvedRequest.getApprovedSum());
             contract.setCreditTerm(approvedRequest.getCreditTerm());
 
@@ -113,5 +117,38 @@ public class ContractDAO implements ContractDAOInterface {
             System.out.println("Исключение!" + e);
         }
 
+    }
+
+    public List<ContractReportViewForm> getAllContracts() {
+        SessionFactory sessionFactory
+                = HibernateSessionFactoryUtil.getSessionFactory();
+
+        try (Session session = sessionFactory.openSession()) {
+
+            String hql = "from ContractModel";
+
+            Query<ContractModel> query = session.createQuery(hql);
+            List<ContractModel> list = query.list();
+            if (list.isEmpty()) {
+                return null;
+            }
+            
+            List<ContractReportViewForm> resultList = new ArrayList<>();
+            for(ContractModel contract : list){
+                ContractReportViewForm result = 
+                        new ContractReportViewForm(
+                                contract.getId(), 
+                                contract.getApproveRequest().getCreditRequest().getId(), 
+                                contract.getContractDate(), 
+                                contract.getStatus(), 
+                                contract.getSigningDate());
+                resultList.add(result);
+            }
+
+            return resultList;
+        } catch (Exception e) {
+            System.out.println("Исключение!" + e);
+            return null;
+        }
     }
 }

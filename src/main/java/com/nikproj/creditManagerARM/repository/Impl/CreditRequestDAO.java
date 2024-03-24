@@ -5,11 +5,15 @@
 package com.nikproj.creditManagerARM.repository.Impl;
 
 import com.nikproj.creditManagerARM.model.CreditRequestModel;
+import com.nikproj.creditManagerARM.model.RequestFullModel;
+import com.nikproj.creditManagerARM.model.UserModel;
 import com.nikproj.creditManagerARM.repository.CreditRequestDAOInterface;
 import com.nikproj.creditManagerARM.utilit.HibernateSessionFactoryUtil;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -64,6 +68,33 @@ public class CreditRequestDAO implements CreditRequestDAOInterface {
             System.out.println("Исключение!" + e);
         }
 
+    }
+
+    public List<RequestFullModel> getFullRequestInfo() {
+        SessionFactory sessionFactory
+                = HibernateSessionFactoryUtil.getSessionFactory();
+
+        try (Session session = sessionFactory.openSession()) {
+
+            String hql
+                    = "select new com.nikproj.creditManagerARM.model.RequestFullModel("
+                    + "r.id, r.user.userId, r.requestDate, r.requestedSum, r.requestStatus, "
+                    + "a.creditTerm, a.approvedSum) "
+                    + "from CreditRequestModel r "
+                    + "left join ApprovedRequestModel a "
+                    + "on r.id = a.creditRequest.id";
+
+            Query<RequestFullModel> query = session.createQuery(hql);
+            List<RequestFullModel> list = query.list();
+            if (list.isEmpty()) {
+                return null;
+            }
+
+            return list;
+        } catch (Exception e) {
+            System.out.println("Исключение!" + e);
+            return null;
+        }
     }
 
 }

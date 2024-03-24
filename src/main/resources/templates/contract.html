@@ -13,6 +13,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <form method="POST" th:object="${contract}">
             <p>Номер договора - <span th:text="*{id}">123456</span></p>
             <p>Дата договора - <span th:text="*{contractDate}">01.01.2020</span></p>
+            <p>Номер заявки - <span th:text="*{requestId}">1243</span></p>
             <p>Одобренная сумма - <span th:text="*{approvedSum}">1000</span></p>
             <p>Срок кредита - <span th:text="*{creditTerm}">12</span> месяцев</p>
             <p>ФИО получателя - <span th:text="*{lastName}">Иванов</span>

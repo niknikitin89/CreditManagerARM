@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymleaf.org">
+    <head>
+        <title>Список всех пользователей</title>
+    </head>
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <th> ID </th>
+                    <th> Фамилия </th>
+                    <th> Имя </th>
+                    <th> Отчество </th>
+                    <th> Серия паспорта </th>
+                    <th> Номер паспорта </th>
+                    <th> Семейное положение </th>
+                    <th> Адрес </th>
+                    <th> Телефон </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:if="${users.empty}">
+                    <td colspan="2"> Данные не найдены </td>
+                </tr>
+                <tr th:each="user : ${users}">
+                    <td><span th:text="${user.userId}"> ID </span></td>
+                    <td><span th:text="${user.lastName}"> Фамилия </span></td>
+                    <td><span th:text="${user.firstName}"> Имя </span></td>
+                    <td><span th:text="${user.patronymic}"> Отчество </span></td>
+                    <td><span th:text="${user.passportSeria}"> Серия паспорта </span></td>
+                    <td><span th:text="${user.passportNumber}"> Номер паспорта </span></td>
+                    <td><span th:text="${user.familyStatus}"> Семейное положение </span></td>
+                    <td><span th:text="${user.address}"> Адрес </span></td>
+                    <td><span th:text="${user.phone}"> Телефон </span></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

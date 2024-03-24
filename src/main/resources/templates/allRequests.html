@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymleaf.org">
+    <head>
+        <title>Список заявок</title>
+    </head>
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <th> ID заявки </th>
+                    <th> ID пользователя </th>
+                    <th> Дата запроса </th>
+                    <th> Запрашиваемая сумма </th>
+                    <th> Статус запроса </th>
+                    <th> Срок кредита </th>
+                    <th> Сумма кредита </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:if="${requests.empty}">
+                    <td colspan="2"> Данные не найдены </td>
+                </tr>
+                <tr th:each="request : ${requests}">
+                    <td><span th:text="${request.id}"> ID заявки </span></td>
+                    <td><span th:text="${request.userId}"> ID пользователя </span></td>
+                    <td><span th:text="${request.requestDate}"> Дата запроса </span></td>
+                    <td><span th:text="${request.requestedSum}"> Запрашиваемая сумма </span></td>
+                    <td><span th:text="${request.requestStatus}"> Статус запроса </span></td>
+                    <td><span th:text="${request.creditTerm}"> Срок кредита </span></td>
+                    <td><span th:text="${request.approvedSum}"> Сумма кредита </span></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

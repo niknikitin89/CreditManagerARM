@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymleaf.org">
+    <head>
+        <title>Список заявок</title>
+    </head>
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <th> Номер договора </th>
+                    <th> Номер заявки </th>
+                    <th> Дата договора </th>
+                    <th> Статус договора </th>
+                    <th> Дата подписания </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:if="${contracts.empty}">
+                    <td colspan="2"> Данные не найдены </td>
+                </tr>
+                <tr th:each="contract : ${contracts}">
+                    <td><span th:text="${contract.id}"> Номер договора </span></td>
+                    <td><span th:text="${contract.requestId}"> Номер заявки </span></td>
+                    <td><span th:text="${contract.contractDate}"> Дата договора </span></td>
+                    <td><span th:text="${contract.status}"> Статус договора </span></td>
+                    <td><span th:text="${contract.signingDate}"> Дата подписания </span></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
