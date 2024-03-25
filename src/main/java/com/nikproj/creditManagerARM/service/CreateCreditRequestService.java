@@ -6,11 +6,14 @@ package com.nikproj.creditManagerARM.service;
 
 import com.nikproj.creditManagerARM.model.Constants;
 import com.nikproj.creditManagerARM.model.CreditRequestModel;
+import com.nikproj.creditManagerARM.model.FamilyStatus;
 import com.nikproj.creditManagerARM.model.RequestFormModel;
 import com.nikproj.creditManagerARM.model.UserModel;
 import com.nikproj.creditManagerARM.repository.CreditRequestDAOInterface;
+import com.nikproj.creditManagerARM.repository.FamilyStatusesDAOInterface;
 import com.nikproj.creditManagerARM.repository.UserDAOInterface;
 import com.nikproj.creditManagerARM.utilit.HibernateSessionManager;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +27,17 @@ import org.springframework.stereotype.Service;
 public class CreateCreditRequestService {
 
     private final UserDAOInterface userDAO;
+    private final FamilyStatusesDAOInterface familyStatusesDAO;
     private final CreditRequestDAOInterface creditRequestDAO;
 
     @Autowired
-    public CreateCreditRequestService(UserDAOInterface userDAO, CreditRequestDAOInterface creditRequestDAO) {
+    public CreateCreditRequestService(
+            UserDAOInterface userDAO,
+            CreditRequestDAOInterface creditRequestDAO,
+            FamilyStatusesDAOInterface familyStatusesDAO) {
         this.userDAO = userDAO;
         this.creditRequestDAO = creditRequestDAO;
+        this.familyStatusesDAO = familyStatusesDAO;
     }
 
     public Long saveRequest(RequestFormModel model) {
@@ -42,7 +50,7 @@ public class CreateCreditRequestService {
 
             //Сохраняем пользователя
             UserModel user = model.getUser();
-            Long userID = userDAO.saveUser(user, session);
+            Long userID = saveUser(user, session);
             if (userID < 0) {
                 System.err.println(Constants.ERR_SAVE_DATABASE);
                 return Long.valueOf(-1);
@@ -68,6 +76,31 @@ public class CreateCreditRequestService {
         }
 
         return requestID;
+    }
+
+    private Long saveUser(UserModel user, Session session) {
+        //Ищем существующего пользователя
+        List<UserModel> usersFromDB = userDAO.findByFIOPassport(
+                user.getFirstName(), 
+                user.getLastName(), 
+                user.getPatronymic(), 
+                user.getPassportSeria(), 
+                user.getPassportNumber());
+             
+        Long userID = Long.valueOf(-1);
+        if (usersFromDB.isEmpty()) {
+            //Создаем нового пользователя
+            userID = userDAO.saveUser(user, session);
+        } else {
+            //Берем первого из списка
+            userID = usersFromDB.get(0).getUserId();
+        }
+
+        return userID;
+    }
+
+    public List<FamilyStatus> getFamilyStatuses() {
+        return familyStatusesDAO.getFamilyStatuses();
     }
 
 }

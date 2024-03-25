@@ -8,7 +8,9 @@ import com.nikproj.creditManagerARM.model.UserModel;
 import com.nikproj.creditManagerARM.repository.UserDAOInterface;
 import com.nikproj.creditManagerARM.utilit.HibernateSessionManager;
 import io.micrometer.common.util.StringUtils;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
@@ -22,35 +24,23 @@ public class UserDAO implements UserDAOInterface {
 
     @Override
     public Long saveUser(UserModel model, Session session) {
-//        SessionFactory sessionFactory
-//                = HibernateSessionManager.getSessionFactory();
-//
-//        long id = 0;
-//        try (Session session = sessionFactory.openSession()) {
-//            Transaction transaction = session.beginTransaction();
-            Long id = (Long) session.save(model);
-//            System.out.println("Generated ID" + id);
-//            transaction.commit();
-//        } catch (Exception e) {
-//            System.out.println("Исключение!" + e);
-//            id = -1;
-//        }
-
+        Long id = (Long) session.save(model);
         return id;
     }
 
     @Override
     public UserModel findById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try (Session session = HibernateSessionManager.openSession()) {
+            return session.get(UserModel.class, id);
+        } catch (Exception e) {
+            System.out.println("Исключение!" + e);
+            return null;
+        }
     }
 
     @Override
     public List<UserModel> getAllUsers() {
-//        SessionFactory sessionFactory
-//                = HibernateSessionManager.getSessionFactory();
-
         try (Session session = HibernateSessionManager.openSession()) {
-
             String hql = "from UserModel";
             Query<UserModel> query = session.createQuery(hql);
             List<UserModel> list = query.list();
@@ -63,19 +53,18 @@ public class UserDAO implements UserDAOInterface {
             System.out.println("Исключение!" + e);
             return null;
         }
-
     }
 
     @Override
     public List<UserModel> findByFIOPassportPhone(String firstName, String lastName, String patronymic, Integer passportSeria, Integer passportNumber, String phone) {
-//        SessionFactory sessionFactory
-//                = HibernateSessionManager.getSessionFactory();
-
         try (Session session = HibernateSessionManager.openSession()) {
 
-            String hql = createDinamicQuery(firstName, lastName, patronymic, passportSeria, passportNumber, phone);
+            Map<String, Object> parameterMap
+                    = parametersToMap(firstName, lastName, patronymic, passportSeria, passportNumber, phone);
+
+            String hql = createDinamicQuery(parameterMap);
             Query<UserModel> query = session.createQuery(hql);
-            addSelectParameters(query, firstName, lastName, patronymic, passportSeria, passportNumber, phone);
+            addSelectParameters(query, parameterMap);
             List<UserModel> list = query.list();
             if (list.isEmpty()) {
                 return null;
@@ -88,68 +77,90 @@ public class UserDAO implements UserDAOInterface {
         }
     }
 
-    private String createDinamicQuery(String firstName, String lastName, String patronymic, Integer passportSeria, Integer passportNumber, String phone) {
+    @Override
+    public List<UserModel> findByFIOPassport(String firstName, String lastName, String patronymic, Integer passportSeria, Integer passportNumber) {
+        try (Session session = HibernateSessionManager.openSession()) {
+
+            Map<String, Object> parameterMap
+                    = parametersToMap(firstName, lastName, patronymic, passportSeria, passportNumber);
+
+            String hql = createDinamicQuery(parameterMap);
+            Query<UserModel> query = session.createQuery(hql);
+            addSelectParameters(query, parameterMap);
+            List<UserModel> list = query.list();
+            if (list.isEmpty()) {
+                return null;
+            }
+
+            return list;
+        } catch (Exception e) {
+            System.out.println("Исключение!" + e);
+            return null;
+        }
+    }
+
+    private Map<String, Object> parametersToMap(
+            String firstName, String lastName, String patronymic,
+            Integer passportSeria, Integer passportNumber) {
+
+        Map<String, Object> parameterMap = new HashMap<>();
+        if (StringUtils.isNotEmpty(firstName)) {
+            parameterMap.put("firstName", firstName);
+        }
+        if (StringUtils.isNotEmpty(lastName)) {
+            parameterMap.put("lastName", lastName);
+        }
+        if (StringUtils.isNotEmpty(patronymic)) {
+            parameterMap.put("patronymic", patronymic);
+        }
+        if (passportSeria != null && passportSeria != 0) {
+            parameterMap.put("passportSeria", passportSeria);
+        }
+        if (passportNumber != null && passportNumber != 0) {
+            parameterMap.put("passportNumber", passportNumber);
+        }
+        return parameterMap;
+    }
+
+    private Map<String, Object> parametersToMap(
+            String firstName, String lastName, String patronymic,
+            Integer passportSeria, Integer passportNumber, String phone) {
+
+        Map<String, Object> parameterMap
+                = parametersToMap(
+                        firstName, lastName, patronymic,
+                        passportSeria, passportNumber);
+
+        if (StringUtils.isNotEmpty(phone)) {
+            parameterMap.put("phone", phone);
+        }
+        return parameterMap;
+    }
+
+    private String createDinamicQuery(Map<String, Object> parameterMap) {
         StringBuilder selectBuilder = new StringBuilder();
         StringBuilder whereBuilder = new StringBuilder();
 
+        //Откуда выбираем
         selectBuilder.append("from UserModel").append(System.lineSeparator());
         //Если условия не заданы будем выбирать все
         whereBuilder.append("where 1 = 1").append(System.lineSeparator());
 
-        if (StringUtils.isNotEmpty(firstName)) {
-            whereBuilder
-                    .append("and firstName = :firstName")
-                    .append(System.lineSeparator());
-        }
-        if (StringUtils.isNotEmpty(lastName)) {
-            whereBuilder
-                    .append("and lastName = :lastName")
-                    .append(System.lineSeparator());
-        }
-        if (StringUtils.isNotEmpty(patronymic)) {
-            whereBuilder
-                    .append("and patronymic = :patronymic")
-                    .append(System.lineSeparator());
-        }
-        if (passportSeria != 0) {
-            whereBuilder
-                    .append("and passportSeria = :passportSeria")
-                    .append(System.lineSeparator());
-        }
-        if (passportNumber != 0) {
-            whereBuilder
-                    .append("and passportNumber = :passportNumber")
-                    .append(System.lineSeparator());
-        }
-        if (StringUtils.isNotEmpty(phone)) {
-            whereBuilder
-                    .append("and phone = :phone")
+        for (Map.Entry<String, Object> entry : parameterMap.entrySet()) {
+            Object key = entry.getKey();
+            whereBuilder.append("and " + key + " = :" + key)
                     .append(System.lineSeparator());
         }
 
         selectBuilder.append(whereBuilder);
-
         return selectBuilder.toString();
     }
 
-    private void addSelectParameters(Query<UserModel> query, String firstName, String lastName, String patronymic, Integer passportSeria, Integer passportNumber, String phone) {
-        if (StringUtils.isNotEmpty(firstName)) {
-            query.setParameter("firstName", firstName);
-        }
-        if (StringUtils.isNotEmpty(lastName)) {
-            query.setParameter("lastName", lastName);
-        }
-        if (StringUtils.isNotEmpty(patronymic)) {
-            query.setParameter("patronymic", patronymic);
-        }
-        if (passportSeria != 0) {
-            query.setParameter("passportSeria", passportSeria);
-        }
-        if (passportNumber != 0) {
-            query.setParameter("passportNumber", passportNumber);
-        }
-        if (StringUtils.isNotEmpty(phone)) {
-            query.setParameter("phone", phone);
+    private void addSelectParameters(Query<UserModel> query, Map<String, Object> parameterMap) {
+        for (Map.Entry<String, Object> entry : parameterMap.entrySet()) {
+            Object key = entry.getKey();
+            Object value = entry.getValue();
+            query.setParameter(key.toString(), value);
         }
     }
 

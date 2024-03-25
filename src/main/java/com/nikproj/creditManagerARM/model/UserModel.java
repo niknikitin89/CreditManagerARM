@@ -27,14 +27,14 @@ public class UserModel {
     private String patronymic;
     private Integer passportSeria;
     private Integer passportNumber;
-    private FamilyStatus familyStatus;
+    private String familyStatus;
     private String address;
     private String phone;
      
     
-    public enum FamilyStatus {
-        FREE, MARRIED
-    }
+//    public enum FamilyStatus {
+//        FREE, MARRIED
+//    }
 
     public Long getUserId() {
         return userId;
@@ -84,11 +84,11 @@ public class UserModel {
         this.passportNumber = passportNumber;
     }
 
-    public FamilyStatus getFamilyStatus() {
+    public String getFamilyStatus() {
         return familyStatus;
     }
 
-    public void setFamilyStatus(FamilyStatus familyStatus) {
+    public void setFamilyStatus(String familyStatus) {
         this.familyStatus = familyStatus;
     }
 

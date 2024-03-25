@@ -67,7 +67,7 @@ public class ContractDAO implements ContractDAOInterface {
 
         try (Session session = HibernateSessionManager.openSession()) {
 
-            String hql = "from ContractModel where approveRequest.id = :requestId";
+            String hql = "from ContractModel where approveRequest.creditRequest.id = :requestId";
             Query<ContractModel> query = session.createQuery(hql);
             query.setParameter("requestId", requestId);
             List<ContractModel> list = query.list();

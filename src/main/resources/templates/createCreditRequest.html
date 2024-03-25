@@ -37,8 +37,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <br/>
 
             <label for="user.familyStatus">Семейное положение</label>
-            <input type="text" th:field="*{user.familyStatus}"/>
-            <input type="text" th:field="*{user.familyStatus}"/>
+            <!--<div th:each="status : ${family_statuses.statuses}">-->
+                <div th:each="status : ${family_statuses}">
+                <input type="radio" th:field=*{user.familyStatus}
+                       th:value="${status.status}"/>
+                <span th:text="${status.statusName}">STATUS</span>
+            </div>
             <br/>
             
             <label for="user.address">Адрес</label>

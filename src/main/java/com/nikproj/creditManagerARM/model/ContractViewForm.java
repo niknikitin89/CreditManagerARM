@@ -23,7 +23,7 @@ public class ContractViewForm {
     private String patronymic;
     private Integer passportSeria;
     private Integer passportNumber;
-    private UserModel.FamilyStatus familyStatus;
+    private String familyStatus;
     private String address;
     private String phone;
 
@@ -107,11 +107,11 @@ public class ContractViewForm {
         this.passportNumber = passportNumber;
     }
 
-    public UserModel.FamilyStatus getFamilyStatus() {
+    public String getFamilyStatus() {
         return familyStatus;
     }
 
-    public void setFamilyStatus(UserModel.FamilyStatus familyStatus) {
+    public void setFamilyStatus(String familyStatus) {
         this.familyStatus = familyStatus;
     }
 

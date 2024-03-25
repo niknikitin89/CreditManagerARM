@@ -21,28 +21,12 @@ public class ApprovedRequestDAO implements ApprovedRequestDAOInterface {
 
     @Override
     public Long saveApprovedRequest(ApprovedRequestModel model, Session session) {
-//        SessionFactory sessionFactory
-//                = HibernateSessionManager.getSessionFactory();
-//
-//        long id = 0;
-//        try (Session session = sessionFactory.openSession()) {
-//            Transaction transaction = session.beginTransaction();
-            Long id = (Long)session.save(model);
-//            System.out.println("Generated ID" + id);
-//            transaction.commit();
-//        } catch (Exception e) {
-//            System.out.println("Исключение!" + e);
-//            id = -1;
-//        }
-
+           Long id = (Long)session.save(model);
         return id;
     }
 
     @Override
     public ApprovedRequestModel findById(Long id) {
-//        SessionFactory sessionFactory
-//                = HibernateSessionManager.getSessionFactory();
-
         try (Session session = HibernateSessionManager.openSession()) {
             return session.get(ApprovedRequestModel.class, id);
         } catch (Exception e) {

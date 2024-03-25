@@ -24,28 +24,12 @@ public class CreditRequestDAO implements CreditRequestDAOInterface {
 
     @Override
     public Long saveCreditRequest(CreditRequestModel model, Session session) {
-//        SessionFactory sessionFactory
-//                = HibernateSessionManager.getSessionFactory();      
-        
-//        long id = 0;
-//        try (Session session = sessionFactory.openSession()) {
-//            Transaction transaction = session.beginTransaction();
            long id = (long) session.save(model);
-//            System.out.println("Generated ID" + id);
-//            transaction.commit();
-//        } catch (Exception e) {
-//            System.out.println("Исключение!" + e);
-//            id = -1;
-//        }
-
         return id;
     }
 
     @Override
     public CreditRequestModel findById(Long id) {
-//        SessionFactory sessionFactory
-//                = HibernateSessionManager.getSessionFactory();
-
         try (Session session = HibernateSessionManager.openSession()) {
             return session.get(CreditRequestModel.class, id);
         } catch (Exception e) {
@@ -56,24 +40,11 @@ public class CreditRequestDAO implements CreditRequestDAOInterface {
 
     @Override
     public void updateCreditRequest(CreditRequestModel model, Session session) {
-//        SessionFactory sessionFactory
-//                = HibernateSessionManager.getSessionFactory();
-//
-//        try (Session session = sessionFactory.openSession()) {
-//            Transaction transaction = session.beginTransaction();
-            session.update(model);
-//            transaction.commit();
-//        } catch (Exception e) {
-//            System.out.println("Исключение!" + e);
-//        }
-
+           session.update(model);
     }
 
     @Override
     public List<RequestFullModel> getFullRequestInfo() {
-//        SessionFactory sessionFactory
-//                = HibernateSessionManager.getSessionFactory();
-
         try (Session session = HibernateSessionManager.openSession()) {
 
             String hql
