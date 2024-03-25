@@ -88,12 +88,13 @@ public class CreateCreditRequestService {
                 user.getPassportNumber());
              
         Long userID = Long.valueOf(-1);
-        if (usersFromDB.isEmpty()) {
+        if (usersFromDB == null || usersFromDB.isEmpty()) {
             //Создаем нового пользователя
             userID = userDAO.saveUser(user, session);
         } else {
             //Берем первого из списка
-            userID = usersFromDB.get(0).getUserId();
+            user.setUserId(usersFromDB.get(0).getUserId());
+            userID = user.getUserId();
         }
 
         return userID;
