@@ -6,61 +6,93 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymleaf.org">
     <head>
-        <title>createCreditApp</title>
+        <title>Создание заявки на кредит</title>
     </head>
     <body>
         <h1>Создание заявки на кредит</h1>
         <form method="POST" th:object="${request}">
             <h3>Данные пользователя</h3>
+            <h5>ФИО</h5>
             <label for="user.firstName">Имя</label>
-            <input type="text" th:field="*{user.firstName}"/>
+            <input type="text" th:field="*{user.firstName}" 
+                   required="required"/>
             <br/>
 
             <label for="user.lastName">Фамилия</label>
-            <input type="text" th:field="*{user.lastName}"/>
-            <br/>
-            
-            <label for="user.patronymic">Отчество</label>
-            <input type="text" th:field="*{user.patronymic}"/>
-            <br/>
-            
-            <label for="user.passportSeria">Серия паспорта</label>
-            <input type="text" th:field="*{user.passportSeria}"
-                   minlength="4"
-                   maxlength="4"/>
+            <input type="text" th:field="*{user.lastName}" 
+                   required="required"/>
             <br/>
 
-            <label for="user.passportNumber">Номер паспорта</label>
-            <input type="text" th:field="*{user.passportNumber}"
-                   minlength="6"
-                   maxlength="6"/>
+            <label for="user.patronymic">Отчество</label>
+            <input type="text" th:field="*{user.patronymic}" 
+                   required="required"/>
             <br/>
 
             <label for="user.familyStatus">Семейное положение</label>
-            <!--<div th:each="status : ${family_statuses.statuses}">-->
-                <div th:each="status : ${family_statuses}">
+            <div th:each="status : ${family_statuses}">
                 <input type="radio" th:field=*{user.familyStatus}
                        th:value="${status.status}"/>
                 <span th:text="${status.statusName}">STATUS</span>
             </div>
             <br/>
-            
+
+            <h5>Паспорт</h5>
+            <label for="user.passportSeria">Серия паспорта</label>
+            <input type="text" th:field="*{user.passportSeria}" 
+                   pattern="[0-9]{4}" title="Формат: 0123"
+                   required="required"
+                   minlength="4"
+                   maxlength="4"/>
+            <br/>
+
+            <label for="user.passportNumber">Номер паспорта</label>
+            <input type="text" th:field="*{user.passportNumber}" 
+                   pattern="[0-9]{6}" title="Формат: 012345"
+                   required="required"
+                   minlength="6"
+                   maxlength="6"/>
+            <br/>
+
+            <h5>Контакты</h5>            
             <label for="user.address">Адрес</label>
             <input type="text" th:field="*{user.address}"/>
             <br/>
-            
+
             <label for="user.phone">Телефон</label>
             <input type="text" th:field="*{user.phone}"
+                   pattern="[0-9]{11}" title="Формат: 89171112233"
                    minlength="10"
                    maxlength="12"/>
             <br/>
-            
+
+            <h5>Последнее место работы</h5>
+            <label for="user.lastWorkPlace">Место работы</label>
+            <input type="text" th:field="*{user.lastWorkPlace}"/>
+            <br/>
+
+            <label for="user.workPeriod">Период работы (в месяцах)</label>
+            <input type="number" th:field="*{user.workPeriod}"
+                   min="1"/>
+            <br/>
+
+            <label for="user.jobTitile">Должность</label>
+            <input type="text" th:field="*{user.jobTitile}"/>
+            <br/>
+
             <h3>Данные о кредите</h3>
             <label for="request.requestedSum">Запрашиваемая сумма</label>
-            <input type="number" th:field="*{request.requestedSum}"/>
+            <input type="number" th:field="*{request.requestedSum}" 
+                   required="required"
+                   min="10000"
+                   max="10000000"/>
             <br/>
-            
+
             <input type="submit" value="Подать заявку"/>
+        </form>
+
+        
+        <form method="POST">
+            <input type="submit" value="На главную" name = "home"/>
         </form>
     </body>
 </html>

@@ -9,6 +9,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <title>Список всех пользователей</title>
     </head>
     <body>
+        <form method="POST">
+            <input type="submit" value="На главную" name = "home"/>
+        </form>
+
         <table>
             <thead>
                 <tr>
@@ -21,6 +25,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <th> Семейное положение </th>
                     <th> Адрес </th>
                     <th> Телефон </th>
+                    <th> Последнее место работы </th>
+                    <th> Период работы </th>
+                    <th> Должность </th>
                 </tr>
             </thead>
             <tbody>
@@ -37,6 +44,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <td><span th:text="${user.familyStatus}"> Семейное положение </span></td>
                     <td><span th:text="${user.address}"> Адрес </span></td>
                     <td><span th:text="${user.phone}"> Телефон </span></td>
+                    <td><span th:text="${user.lastWorkPlace}"> Последнее место работы </span></td>
+                    <td><span th:text="${user.workPeriod}"> Период работы </span></td>
+                    <td><span th:text="${user.jobTitile}"> Должность </span></td>
                 </tr>
             </tbody>
         </table>

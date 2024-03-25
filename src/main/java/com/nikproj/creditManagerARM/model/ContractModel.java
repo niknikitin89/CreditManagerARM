@@ -11,7 +11,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.Date;
-import lombok.Data;
 
 /**
  *
@@ -32,7 +31,7 @@ public class ContractModel {
     private ApprovedRequestModel approveRequest;
     
     private Date contractDate;
-    private Status status;
+    private String status;
     private Date signingDate;
 
     public enum Status {
@@ -47,7 +46,7 @@ public class ContractModel {
         return contractDate;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
@@ -64,7 +63,7 @@ public class ContractModel {
     }
 
     public void setStatus(Status status) {
-        this.status = status;
+        this.status = status.toString();
     }
 
     public void setSigningDate(Date signingDate) {

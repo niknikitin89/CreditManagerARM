@@ -53,30 +53,51 @@ public class ApprovalRequestService {
 
     private ApprovedRequestModel analysisAndDecision(Long requestId) {
         if (Math.random() > 0.5) {
-            //Обновляем инфу по статусу заявки
-            CreditRequestModel request = creditRequestDAO.findById(requestId);
-            request.setRequestStatus(CreditRequestModel.Status.APPROVED);
-            ApprovedRequestModel approvedRequest = new ApprovedRequestModel();
-            try {
-                Session session = HibernateSessionManager.openSession();
-                Transaction transaction = session.beginTransaction();
-
-                creditRequestDAO.updateCreditRequest(request, session);
-
-                //Вносим данные в перечень одобренных заявок
-                approvedRequest.setCreditRequest(request);
-                approvedRequest.setCreditTerm((int) (Math.random() * 12));
-                approvedRequest.setApprovedSum(Math.random() * request.getRequestedSum());
-                approvedRequestDAO.saveApprovedRequest(approvedRequest, session);
-
-                transaction.commit();
-            } catch (Exception e) {
-                System.out.println("Исключение!" + e);
-            }
+            ApprovedRequestModel approvedRequest = approve(requestId);
             return approvedRequest;
         } else {
+            reject(requestId);
             return null;
         }
+    }
+
+    private void reject(Long requestId) {
+        CreditRequestModel request = creditRequestDAO.findById(requestId);
+        request.setRequestStatus(CreditRequestModel.Status.REJECTED);
+        try {
+            Session session = HibernateSessionManager.openSession();
+            Transaction transaction = session.beginTransaction();
+            
+            creditRequestDAO.updateCreditRequest(request, session);
+            
+            transaction.commit();
+        } catch (Exception e) {
+            System.out.println("Исключение!" + e);
+        }
+    }
+
+    private ApprovedRequestModel approve(Long requestId) {
+        //Обновляем инфу по статусу заявки
+        CreditRequestModel request = creditRequestDAO.findById(requestId);
+        request.setRequestStatus(CreditRequestModel.Status.APPROVED);
+        ApprovedRequestModel approvedRequest = new ApprovedRequestModel();
+        try {
+            Session session = HibernateSessionManager.openSession();
+            Transaction transaction = session.beginTransaction();
+            
+            creditRequestDAO.updateCreditRequest(request, session);
+            
+            //Вносим данные в перечень одобренных заявок
+            approvedRequest.setCreditRequest(request);
+            approvedRequest.setCreditTerm((int) (Math.random() * 12));
+            approvedRequest.setApprovedSum(Math.random() * request.getRequestedSum());
+            approvedRequestDAO.saveApprovedRequest(approvedRequest, session);
+            
+            transaction.commit();
+        } catch (Exception e) {
+            System.out.println("Исключение!" + e);
+        }
+        return approvedRequest;
     }
 
     private Long generateContractForRequest(ApprovedRequestModel approvedRequest) {

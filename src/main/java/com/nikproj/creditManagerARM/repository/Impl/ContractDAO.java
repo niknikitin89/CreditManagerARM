@@ -30,28 +30,12 @@ public class ContractDAO implements ContractDAOInterface {
 
     @Override
     public Long saveContract(ContractModel model, Session session) {
-//        SessionFactory sessionFactory
-//                = HibernateSessionManager.getSessionFactory();
-//
-//        long id = 0;
-//        try (Session session = sessionFactory.openSession()) {
-//            Transaction transaction = session.beginTransaction();
-           Long id = (Long) session.save(model);
-//            System.out.println("Generated ID" + id);
-//            transaction.commit();
-//        } catch (Exception e) {
-//            System.out.println("Исключение!" + e);
-//            id = -1;
-//        }
-
+        Long id = (Long) session.save(model);
         return id;
     }
 
     @Override
     public ContractModel findById(Long id) {
-//        SessionFactory sessionFactory
-//                = HibernateSessionManager.getSessionFactory();
-
         try (Session session = HibernateSessionManager.openSession()) {
             return session.get(ContractModel.class, id);
         } catch (Exception e) {
@@ -62,9 +46,6 @@ public class ContractDAO implements ContractDAOInterface {
 
     @Override
     public ContractViewForm getFullContractInfoByRequestId(Long requestId) {
-//        SessionFactory sessionFactory
-//                = HibernateSessionManager.getSessionFactory();
-
         try (Session session = HibernateSessionManager.openSession()) {
 
             String hql = "from ContractModel where approveRequest.creditRequest.id = :requestId";
@@ -106,24 +87,11 @@ public class ContractDAO implements ContractDAOInterface {
 
     @Override
     public void updateContract(ContractModel model, Session session) {
-//        SessionFactory sessionFactory
-//                = HibernateSessionManager.getSessionFactory();
-//
-//        try (Session session = sessionFactory.openSession()) {
-//            Transaction transaction = session.beginTransaction();
-            session.update(model);
-//            transaction.commit();
-//        } catch (Exception e) {
-//            System.out.println("Исключение!" + e);
-//        }
-
+        session.update(model);
     }
 
     @Override
     public List<ContractReportViewForm> getAllContracts() {
-//        SessionFactory sessionFactory
-//                = HibernateSessionManager.getSessionFactory();
-
         try (Session session = HibernateSessionManager.openSession()) {
 
             String hql = "from ContractModel";
@@ -133,15 +101,15 @@ public class ContractDAO implements ContractDAOInterface {
             if (list.isEmpty()) {
                 return null;
             }
-            
+
             List<ContractReportViewForm> resultList = new ArrayList<>();
-            for(ContractModel contract : list){
-                ContractReportViewForm result = 
-                        new ContractReportViewForm(
-                                contract.getId(), 
-                                contract.getApproveRequest().getCreditRequest().getId(), 
-                                contract.getContractDate(), 
-                                contract.getStatus(), 
+            for (ContractModel contract : list) {
+                ContractReportViewForm result
+                        = new ContractReportViewForm(
+                                contract.getId(),
+                                contract.getApproveRequest().getCreditRequest().getId(),
+                                contract.getContractDate(),
+                                contract.getStatus(),
                                 contract.getSigningDate());
                 resultList.add(result);
             }

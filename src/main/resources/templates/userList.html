@@ -24,11 +24,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <br/>
 
             <label for="passportSeria">Серия паспорта</label>
-            <input type="text" th:field="*{passportSeria}"/>
+            <input type="text" th:field="*{passportSeria}"
+                   pattern="[0-9]{4}" title="Формат: 0123"
+                   minlength="4"
+                   maxlength="4"/>
             <br/>
 
             <label for="passportNumber">Номер паспорта</label>
-            <input type="text" th:field="*{passportNumber}"/>
+            <input type="text" th:field="*{passportNumber}" 
+                   pattern="[0-9]{6}" title="Формат: 012345"
+                   minlength="6"
+                   maxlength="6"/>
             <br/>
 
             <label for="phone">Телефон</label>
@@ -36,6 +42,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <br/>
 
             <input type="submit" value="Поиск" name = "search"/>
+        </form>
+
+        <form method="POST">
+            <input type="submit" value="На главную" name = "home"/>
         </form>
 
         <h1>Результат поиска</h1>

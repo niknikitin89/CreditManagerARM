@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -21,24 +22,29 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @Controller
 @RequestMapping("/cmarm/all_contracts")
 public class AllContractsReportController {
-    
+
     private AllContractsReportService service;
 
     @Autowired
     public AllContractsReportController(AllContractsReportService service) {
         this.service = service;
     }
-   
+
     @ModelAttribute(name = "contracts")
-    public List<ContractReportViewForm> contracts(){
+    public List<ContractReportViewForm> contracts() {
         return new ArrayList<ContractReportViewForm>();
     }
-    
+
     @GetMapping
     public String showAllUsers(
-            @ModelAttribute(name = "contracts") List<ContractReportViewForm> contracts){
-        
+            @ModelAttribute(name = "contracts") List<ContractReportViewForm> contracts) {
+
         service.fillContractList(contracts);
         return "allContracts";
+    }
+
+    @PostMapping(params = "home")
+    public String onHomePage() {
+        return "redirect:/cmarm";
     }
 }

@@ -22,20 +22,22 @@ public class UserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
-    private String firstName;
-    private String lastName;
-    private String patronymic;
-    private Integer passportSeria;
-    private Integer passportNumber;
-    private String familyStatus;
-    private String address;
-    private String phone;
-     
     
-//    public enum FamilyStatus {
-//        FREE, MARRIED
-//    }
-
+    private String firstName;//имя
+    private String lastName;//фамилия
+    private String patronymic;//отчество
+    
+    private Integer passportSeria;//серия паспорта
+    private Integer passportNumber;//номер паспорта
+    
+    private String familyStatus;//семейное положение
+    private String address;//адрес прописки
+    private String phone;//телефон
+     
+    private String lastWorkPlace;//последнее место работы
+    private Integer workPeriod;//период работы
+    private String jobTitile;//должность
+    
     public Long getUserId() {
         return userId;
     }
@@ -106,6 +108,30 @@ public class UserModel {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getLastWorkPlace() {
+        return lastWorkPlace;
+    }
+
+    public void setLastWorkPlace(String lastWorkPlace) {
+        this.lastWorkPlace = lastWorkPlace;
+    }
+
+    public Integer getWorkPeriod() {
+        return workPeriod;
+    }
+
+    public void setWorkPeriod(Integer workPeriod) {
+        this.workPeriod = workPeriod;
+    }
+
+    public String getJobTitile() {
+        return jobTitile;
+    }
+
+    public void setJobTitile(String jobTitile) {
+        this.jobTitile = jobTitile;
     }
     
     

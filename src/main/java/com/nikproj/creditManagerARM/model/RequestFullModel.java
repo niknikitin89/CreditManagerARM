@@ -16,11 +16,11 @@ public class RequestFullModel {
     private Long userId;
     private Date requestDate;
     private Double requestedSum;
-    private CreditRequestModel.Status requestStatus;
+    private String requestStatus;
     private Integer creditTerm;
     private Double approvedSum;  
 
-    public RequestFullModel(Long id, Long userId, Date requestDate, Double requestedSum, CreditRequestModel.Status requestStatus, Integer creditTerm, Double approvedSum) {
+    public RequestFullModel(Long id, Long userId, Date requestDate, Double requestedSum, String requestStatus, Integer creditTerm, Double approvedSum) {
         this.id = id;
         this.userId = userId;
         this.requestDate = requestDate;
@@ -65,11 +65,11 @@ public class RequestFullModel {
         this.requestedSum = requestedSum;
     }
 
-    public CreditRequestModel.Status getRequestStatus() {
+    public String getRequestStatus() {
         return requestStatus;
     }
 
-    public void setRequestStatus(CreditRequestModel.Status requestStatus) {
+    public void setRequestStatus(String requestStatus) {
         this.requestStatus = requestStatus;
     }
 

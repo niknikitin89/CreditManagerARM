@@ -30,7 +30,7 @@ public class CreditRequestModel {
     private UserModel user;
     private Date requestDate; 
     private Double requestedSum;
-    private Status requestStatus;
+    private String requestStatus;
     
     public enum Status{
         WAIT, APPROVED, REJECTED
@@ -69,11 +69,11 @@ public class CreditRequestModel {
     }
 
     public Status getRequestStatus() {
-        return requestStatus;
+        return Enum.valueOf(Status.class, requestStatus);
     }
 
     public void setRequestStatus(Status requestStatus) {
-        this.requestStatus = requestStatus;
+        this.requestStatus = requestStatus.toString();
     }
     
     

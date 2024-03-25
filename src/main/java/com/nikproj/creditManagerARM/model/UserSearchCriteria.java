@@ -13,8 +13,8 @@ public class UserSearchCriteria {
     private String firstName = new String();
     private String lastName = new String();
     private String patronymic = new String();
-    private Integer passportSeria = 0;
-    private Integer passportNumber = 0;
+    private String passportSeria = new String();
+    private String passportNumber = new String();
     private String phone = new String();
 
     public String getFirstName() {
@@ -41,19 +41,19 @@ public class UserSearchCriteria {
         this.patronymic = patronymic;
     }
 
-    public Integer getPassportSeria() {
+    public String getPassportSeria() {
         return passportSeria;
     }
 
-    public void setPassportSeria(Integer passportSeria) {
+    public void setPassportSeria(String passportSeria) {
         this.passportSeria = passportSeria;
     }
 
-    public Integer getPassportNumber() {
+    public String getPassportNumber() {
         return passportNumber;
     }
 
-    public void setPassportNumber(Integer passportNumber) {
+    public void setPassportNumber(String passportNumber) {
         this.passportNumber = passportNumber;
     }
 
@@ -69,8 +69,8 @@ public class UserSearchCriteria {
         if (this.firstName.isEmpty()
                 && this.lastName.isEmpty()
                 && this.patronymic.isEmpty()
-                && this.passportSeria == 0
-                && this.passportNumber == 0
+                && this.passportSeria.isEmpty()
+                && this.passportNumber.isEmpty()
                 && this.phone.isEmpty()) {
             return true;
         } else {

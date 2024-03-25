@@ -46,7 +46,7 @@ public class CreateCreditRequestController {
     }
 
     @ModelAttribute(name = "family_statuses")
-    public List<FamilyStatus> familyStatuses() {        
+    public List<FamilyStatus> familyStatuses() {
         return createRequestService.getFamilyStatuses();
     }
 
@@ -55,14 +55,13 @@ public class CreateCreditRequestController {
         return "createCreditRequest";
     }
 
-    @PostMapping//("/new_app")
+    @PostMapping
     public String createNewCreditRequest(
             @ModelAttribute(name = "request") RequestFormModel model,
             SessionStatus sessionStatus) {
-        
+
         //Сохранение запроса
         Long requestId = createRequestService.saveRequest(model);
-//        model.getRequest().setId(requestId);
 
         //Отправка запроса на одобрение
         CreditRequestModel.Status approveStatus
@@ -74,5 +73,11 @@ public class CreateCreditRequestController {
             sessionStatus.setComplete();
             return "redirect:/cmarm/request_rejected";
         }
+    }
+
+    @PostMapping(params = "home")
+    public String onHomePage(SessionStatus sessionStatus) {
+        sessionStatus.setComplete();
+        return "redirect:/cmarm";
     }
 }

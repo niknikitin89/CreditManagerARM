@@ -15,10 +15,10 @@ public class ContractReportViewForm {
     private Long id;
     private Long requestId;
     private Date contractDate;
-    private ContractModel.Status status;
+    private String status;
     private Date signingDate;
 
-    public ContractReportViewForm(Long id, Long requestId, Date contractDate, ContractModel.Status status, Date signingDate) {
+    public ContractReportViewForm(Long id, Long requestId, Date contractDate, String status, Date signingDate) {
         this.id = id;
         this.requestId = requestId;
         this.contractDate = contractDate;
@@ -50,11 +50,11 @@ public class ContractReportViewForm {
         this.contractDate = contractDate;
     }
 
-    public ContractModel.Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(ContractModel.Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

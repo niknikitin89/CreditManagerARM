@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -45,9 +46,14 @@ public class UserSearchController {
             @ModelAttribute(name = "search_criteria") UserSearchCriteria searchCriteria,
             @ModelAttribute(name = "users") List<UserModel> users) {
 
-        if (!searchCriteria.isEmpty()) {
-            service.searchUsers(searchCriteria, users);
-        }
+//        if (!searchCriteria.isEmpty()) {
+        service.searchUsers(searchCriteria, users);
+//        }
         return "userList";
+    }
+
+    @PostMapping(params = "home")
+    public String onHomePage() {
+        return "redirect:/cmarm";
     }
 }

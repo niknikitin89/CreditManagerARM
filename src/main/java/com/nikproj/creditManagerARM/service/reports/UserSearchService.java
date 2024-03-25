@@ -27,13 +27,29 @@ public class UserSearchService {
     }
 
     public void searchUsers(UserSearchCriteria searchCriteria, List<UserModel> resultOfSearch) {
-        List<UserModel> usersFromDB = userDAO.findByFIOPassportPhone(
-                searchCriteria.getFirstName(),
-                searchCriteria.getLastName(),
-                searchCriteria.getPatronymic(),
-                searchCriteria.getPassportSeria(),
-                searchCriteria.getPassportNumber(),
-                searchCriteria.getPhone());
+        
+        Integer passportSeria;
+        if (searchCriteria.getPassportSeria().isEmpty()) {
+            passportSeria = 0;
+        } else {
+            passportSeria = Integer.valueOf(searchCriteria.getPassportSeria());
+        }
+        
+        Integer passportNumber;
+        if (searchCriteria.getPassportNumber().isEmpty()) {
+            passportNumber = 0;
+        } else {
+            passportNumber = Integer.valueOf(searchCriteria.getPassportNumber());
+        }
+        
+        List<UserModel> usersFromDB
+                = userDAO.findByFIOPassportPhone(
+                        searchCriteria.getFirstName(),
+                        searchCriteria.getLastName(),
+                        searchCriteria.getPatronymic(),
+                        passportSeria,
+                        passportNumber,
+                        searchCriteria.getPhone());
 
         if (!usersFromDB.isEmpty()) {
             resultOfSearch.addAll(usersFromDB);

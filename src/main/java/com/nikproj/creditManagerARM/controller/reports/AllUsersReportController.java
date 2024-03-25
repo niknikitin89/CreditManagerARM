@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -39,4 +40,9 @@ public class AllUsersReportController {
         service.fillUserList(users);
         return "allUsers";
     }
+    
+    @PostMapping(params = "home")
+    public String onHomePage() {
+        return "redirect:/cmarm";
+    }    
 }
