@@ -10,7 +10,10 @@ import com.nikproj.creditManagerARM.model.CreditRequestModel;
 import com.nikproj.creditManagerARM.repository.ApprovedRequestDAOInterface;
 import com.nikproj.creditManagerARM.repository.ContractDAOInterface;
 import com.nikproj.creditManagerARM.repository.CreditRequestDAOInterface;
+import com.nikproj.creditManagerARM.utilit.HibernateSessionManager;
 import java.util.Date;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,11 +45,9 @@ public class ApprovalRequestService {
 
         if (approvedRequest != null) {
             //генерируем договор
-            Long contract_Id = generateContractForRequest(approvedRequest);
-
+            generateContractForRequest(approvedRequest);
             return CreditRequestModel.Status.APPROVED;
         }
-
         return CreditRequestModel.Status.REJECTED;
     }
 
@@ -55,15 +56,23 @@ public class ApprovalRequestService {
             //Обновляем инфу по статусу заявки
             CreditRequestModel request = creditRequestDAO.findById(requestId);
             request.setRequestStatus(CreditRequestModel.Status.APPROVED);
-            creditRequestDAO.updateCreditRequest(request);
-
-            //Вносим данные в перечень одобренных заявок
             ApprovedRequestModel approvedRequest = new ApprovedRequestModel();
-            approvedRequest.setCreditRequest(request);
-            approvedRequest.setCreditTerm((int) (Math.random() * 12));
-            approvedRequest.setApprovedSum(Math.random() * request.getRequestedSum());
-            approvedRequestDAO.saveApprovedRequest(approvedRequest);
+            try {
+                Session session = HibernateSessionManager.openSession();
+                Transaction transaction = session.beginTransaction();
 
+                creditRequestDAO.updateCreditRequest(request, session);
+
+                //Вносим данные в перечень одобренных заявок
+                approvedRequest.setCreditRequest(request);
+                approvedRequest.setCreditTerm((int) (Math.random() * 12));
+                approvedRequest.setApprovedSum(Math.random() * request.getRequestedSum());
+                approvedRequestDAO.saveApprovedRequest(approvedRequest, session);
+
+                transaction.commit();
+            } catch (Exception e) {
+                System.out.println("Исключение!" + e);
+            }
             return approvedRequest;
         } else {
             return null;
@@ -75,7 +84,17 @@ public class ApprovalRequestService {
         contract.setApproveRequest(approvedRequest);
         contract.setContractDate(new Date());
         contract.setStatus(ContractModel.Status.WAIT);
-        Long id = contractDAO.saveContract(contract);
+
+        Long id = Long.valueOf(-1);
+        try {
+            Session session = HibernateSessionManager.openSession();
+            Transaction transaction = session.beginTransaction();
+
+            id = contractDAO.saveContract(contract, session);
+            transaction.commit();
+        } catch (Exception e) {
+            System.out.println("Исключение!" + e);
+        }
         return id;
     }
 

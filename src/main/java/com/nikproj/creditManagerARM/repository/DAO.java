@@ -5,7 +5,7 @@
 package com.nikproj.creditManagerARM.repository;
 
 import com.nikproj.creditManagerARM.model.CreditRequestModel;
-import com.nikproj.creditManagerARM.utilit.HibernateSessionFactoryUtil;
+import com.nikproj.creditManagerARM.utilit.HibernateSessionManager;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -20,7 +20,7 @@ public class DAO {
 
     public static void dosomething() {
         SessionFactory sessionFactory = 
-                HibernateSessionFactoryUtil.getSessionFactory();
+                HibernateSessionManager.getSessionFactory();
         try (Session session = sessionFactory.openSession()) {
             Query<CreditRequestModel> query = 
                     session.createQuery("from CreditRequestModel", 

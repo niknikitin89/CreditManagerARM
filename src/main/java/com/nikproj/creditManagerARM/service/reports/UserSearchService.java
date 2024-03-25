@@ -7,6 +7,7 @@ package com.nikproj.creditManagerARM.service.reports;
 import com.nikproj.creditManagerARM.model.UserModel;
 import com.nikproj.creditManagerARM.model.UserSearchCriteria;
 import com.nikproj.creditManagerARM.repository.Impl.UserDAO;
+import com.nikproj.creditManagerARM.repository.UserDAOInterface;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,10 +19,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserSearchService {
 
-    private UserDAO userDAO;
+    private UserDAOInterface userDAO;
 
     @Autowired
-    public UserSearchService(UserDAO userDAO) {
+    public UserSearchService(UserDAOInterface userDAO) {
         this.userDAO = userDAO;
     }
 

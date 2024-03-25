@@ -7,7 +7,10 @@ package com.nikproj.creditManagerARM.service;
 import com.nikproj.creditManagerARM.model.ContractModel;
 import com.nikproj.creditManagerARM.model.ContractViewForm;
 import com.nikproj.creditManagerARM.repository.ContractDAOInterface;
+import com.nikproj.creditManagerARM.utilit.HibernateSessionManager;
 import java.util.Date;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,14 +36,32 @@ public class ContractBrowseService {
         ContractModel contract = contractDAO.findById(id);
         contract.setStatus(ContractModel.Status.SIGNED);
         contract.setSigningDate(new Date());
-        contractDAO.updateContract(contract);
+
+        try {
+            Session session = HibernateSessionManager.openSession();
+            Transaction transaction = session.beginTransaction();
+
+            contractDAO.updateContract(contract, session);
+            transaction.commit();
+        } catch (Exception e) {
+            System.out.println("Исключение!" + e);
+        }
     }
 
     public void cancelContract(Long id) {
         ContractModel contract = contractDAO.findById(id);
         contract.setStatus(ContractModel.Status.CANCELED);
         contract.setSigningDate(new Date());
-        contractDAO.updateContract(contract);
+
+        try {
+            Session session = HibernateSessionManager.openSession();
+            Transaction transaction = session.beginTransaction();
+
+            contractDAO.updateContract(contract, session);
+            transaction.commit();
+        } catch (Exception e) {
+            System.out.println("Исключение!" + e);
+        }
     }
 
 }

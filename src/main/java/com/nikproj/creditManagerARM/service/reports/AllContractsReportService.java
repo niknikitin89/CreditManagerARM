@@ -5,6 +5,7 @@
 package com.nikproj.creditManagerARM.service.reports;
 
 import com.nikproj.creditManagerARM.model.ContractReportViewForm;
+import com.nikproj.creditManagerARM.repository.ContractDAOInterface;
 import com.nikproj.creditManagerARM.repository.Impl.ContractDAO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class AllContractsReportService {
 
-    private ContractDAO contractDAO;
+    private ContractDAOInterface contractDAO;
 
     @Autowired
-    public AllContractsReportService(ContractDAO contractDAO) {
+    public AllContractsReportService(ContractDAOInterface contractDAO) {
         this.contractDAO = contractDAO;
     }
 

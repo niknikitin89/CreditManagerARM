@@ -10,6 +10,9 @@ import com.nikproj.creditManagerARM.model.RequestFormModel;
 import com.nikproj.creditManagerARM.model.UserModel;
 import com.nikproj.creditManagerARM.repository.CreditRequestDAOInterface;
 import com.nikproj.creditManagerARM.repository.UserDAOInterface;
+import com.nikproj.creditManagerARM.utilit.HibernateSessionManager;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,37 +22,52 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CreateCreditRequestService {
-    
+
     private final UserDAOInterface userDAO;
     private final CreditRequestDAOInterface creditRequestDAO;
-    
+
     @Autowired
     public CreateCreditRequestService(UserDAOInterface userDAO, CreditRequestDAOInterface creditRequestDAO) {
         this.userDAO = userDAO;
         this.creditRequestDAO = creditRequestDAO;
     }
-    
-    public Long saveRequest(RequestFormModel model) {
-        //Сохраняем пользователя
-        UserModel user = model.getUser();
-        Long userID = userDAO.saveUser(user);
-        if (userID < 0) {
-            System.err.println(Constants.ERR_SAVE_DATABASE);
-            return Long.valueOf(-1);
-        }
 
-        //Сохраняем информацию по заявке
-        CreditRequestModel request = model.getRequest();
-//        request.setUserId(userID);
-        request.setUser(user);
-        request.setRequestStatus(CreditRequestModel.Status.WAIT);
-        Long requestID = creditRequestDAO.saveCreditRequest(request);
+    public Long saveRequest(RequestFormModel model) {
+        Long requestID = Long.valueOf(-1);
+
+////Открываем сессию и начинаем транзакцию
+        try {
+            Session session = HibernateSessionManager.openSession();
+            Transaction transaction = session.beginTransaction();
+
+            //Сохраняем пользователя
+            UserModel user = model.getUser();
+            Long userID = userDAO.saveUser(user, session);
+            if (userID < 0) {
+                System.err.println(Constants.ERR_SAVE_DATABASE);
+                return Long.valueOf(-1);
+            }
+
+            //Сохраняем информацию по заявке
+            ////Формируем заявку
+            CreditRequestModel request = model.getRequest();
+            request.setUser(user);
+            request.setRequestStatus(CreditRequestModel.Status.WAIT);
+
+            ////Обновление
+            requestID = creditRequestDAO.saveCreditRequest(request, session);
+
+            ////COMMIT
+            transaction.commit();
+        } catch (Exception e) {
+            System.out.println("Исключение!" + e);
+        }
         if (requestID < 0) {
             System.err.println(Constants.ERR_SAVE_DATABASE);
             return Long.valueOf(-1);
         }
-        
+
         return requestID;
     }
-    
+
 }

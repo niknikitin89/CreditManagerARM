@@ -5,7 +5,7 @@
 package com.nikproj.creditManagerARM.repository;
 
 import com.nikproj.creditManagerARM.model.ApprovedRequestModel;
-import com.nikproj.creditManagerARM.model.CreditRequestModel;
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ApprovedRequestDAOInterface {
-    Long saveApprovedRequest(ApprovedRequestModel model);
+    Long saveApprovedRequest(ApprovedRequestModel model, Session session);
     ApprovedRequestModel findById(Long id);
 
 //    public void updateCreditRequest(ApprovedRequestModel request);

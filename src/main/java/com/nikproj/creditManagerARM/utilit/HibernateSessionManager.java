@@ -9,6 +9,8 @@ import com.nikproj.creditManagerARM.model.ApprovedRequestModel;
 import com.nikproj.creditManagerARM.model.ContractModel;
 import com.nikproj.creditManagerARM.model.CreditRequestModel;
 import com.nikproj.creditManagerARM.model.UserModel;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -19,11 +21,11 @@ import org.hibernate.cfg.Configuration;
  *
  * @author user
  */
-public class HibernateSessionFactoryUtil {
+public class HibernateSessionManager {
 
     private static SessionFactory sessionFactory;
 
-    private HibernateSessionFactoryUtil() {
+    private HibernateSessionManager() {
     }
 
     public static SessionFactory getSessionFactory() {
@@ -33,6 +35,10 @@ public class HibernateSessionFactoryUtil {
         return sessionFactory;
     }
 
+    public static Session openSession() throws HibernateException{
+        return getSessionFactory().openSession();
+    }
+    
     private static SessionFactory createSessionFactory() {
         try {
             Configuration configuration = new Configuration().configure();

@@ -4,18 +4,12 @@
  */
 package com.nikproj.creditManagerARM.repository.Impl;
 
-import com.nikproj.creditManagerARM.model.ApprovedRequestModel;
-import com.nikproj.creditManagerARM.model.ContractModel;
-import com.nikproj.creditManagerARM.model.ContractViewForm;
-import com.nikproj.creditManagerARM.model.CreditRequestModel;
 import com.nikproj.creditManagerARM.model.UserModel;
 import com.nikproj.creditManagerARM.repository.UserDAOInterface;
-import com.nikproj.creditManagerARM.utilit.HibernateSessionFactoryUtil;
+import com.nikproj.creditManagerARM.utilit.HibernateSessionManager;
 import io.micrometer.common.util.StringUtils;
 import java.util.List;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
@@ -27,20 +21,20 @@ import org.springframework.stereotype.Repository;
 public class UserDAO implements UserDAOInterface {
 
     @Override
-    public Long saveUser(UserModel model) {
-        SessionFactory sessionFactory
-                = HibernateSessionFactoryUtil.getSessionFactory();
-
-        long id = 0;
-        try (Session session = sessionFactory.openSession()) {
-            Transaction transaction = session.beginTransaction();
-            id = (Long) session.save(model);
-            System.out.println("Generated ID" + id);
-            transaction.commit();
-        } catch (Exception e) {
-            System.out.println("Исключение!" + e);
-            id = -1;
-        }
+    public Long saveUser(UserModel model, Session session) {
+//        SessionFactory sessionFactory
+//                = HibernateSessionManager.getSessionFactory();
+//
+//        long id = 0;
+//        try (Session session = sessionFactory.openSession()) {
+//            Transaction transaction = session.beginTransaction();
+            Long id = (Long) session.save(model);
+//            System.out.println("Generated ID" + id);
+//            transaction.commit();
+//        } catch (Exception e) {
+//            System.out.println("Исключение!" + e);
+//            id = -1;
+//        }
 
         return id;
     }
@@ -50,11 +44,12 @@ public class UserDAO implements UserDAOInterface {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Override
     public List<UserModel> getAllUsers() {
-        SessionFactory sessionFactory
-                = HibernateSessionFactoryUtil.getSessionFactory();
+//        SessionFactory sessionFactory
+//                = HibernateSessionManager.getSessionFactory();
 
-        try (Session session = sessionFactory.openSession()) {
+        try (Session session = HibernateSessionManager.openSession()) {
 
             String hql = "from UserModel";
             Query<UserModel> query = session.createQuery(hql);
@@ -71,11 +66,12 @@ public class UserDAO implements UserDAOInterface {
 
     }
 
+    @Override
     public List<UserModel> findByFIOPassportPhone(String firstName, String lastName, String patronymic, Integer passportSeria, Integer passportNumber, String phone) {
-        SessionFactory sessionFactory
-                = HibernateSessionFactoryUtil.getSessionFactory();
+//        SessionFactory sessionFactory
+//                = HibernateSessionManager.getSessionFactory();
 
-        try (Session session = sessionFactory.openSession()) {
+        try (Session session = HibernateSessionManager.openSession()) {
 
             String hql = createDinamicQuery(firstName, lastName, patronymic, passportSeria, passportNumber, phone);
             Query<UserModel> query = session.createQuery(hql);

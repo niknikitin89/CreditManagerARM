@@ -5,6 +5,7 @@
 package com.nikproj.creditManagerARM.service.reports;
 
 import com.nikproj.creditManagerARM.model.RequestFullModel;
+import com.nikproj.creditManagerARM.repository.CreditRequestDAOInterface;
 import com.nikproj.creditManagerARM.repository.Impl.CreditRequestDAO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class AllRequestsReportService {
 
-    private CreditRequestDAO requesDAO;
+    private CreditRequestDAOInterface requesDAO;
 
     @Autowired
-    public AllRequestsReportService(CreditRequestDAO requesDAO) {
+    public AllRequestsReportService(CreditRequestDAOInterface requesDAO) {
         this.requesDAO = requesDAO;
     }
     

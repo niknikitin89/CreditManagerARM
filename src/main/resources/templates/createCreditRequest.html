@@ -20,28 +20,35 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <input type="text" th:field="*{user.lastName}"/>
             <br/>
             
-            <label for="user.lastName">Отчество</label>
+            <label for="user.patronymic">Отчество</label>
             <input type="text" th:field="*{user.patronymic}"/>
             <br/>
             
             <label for="user.passportSeria">Серия паспорта</label>
-            <input type="text" th:field="*{user.passportSeria}"/>
+            <input type="text" th:field="*{user.passportSeria}"
+                   minlength="4"
+                   maxlength="4"/>
             <br/>
 
             <label for="user.passportNumber">Номер паспорта</label>
-            <input type="text" th:field="*{user.passportNumber}"/>
+            <input type="text" th:field="*{user.passportNumber}"
+                   minlength="6"
+                   maxlength="6"/>
             <br/>
 
-            <label for="user.lastName">Семейное положение</label>
+            <label for="user.familyStatus">Семейное положение</label>
+            <input type="text" th:field="*{user.familyStatus}"/>
             <input type="text" th:field="*{user.familyStatus}"/>
             <br/>
             
-            <label for="user.lastName">Адрес</label>
+            <label for="user.address">Адрес</label>
             <input type="text" th:field="*{user.address}"/>
             <br/>
             
-            <label for="user.lastName">Телефон</label>
-            <input type="text" th:field="*{user.phone}"/>
+            <label for="user.phone">Телефон</label>
+            <input type="text" th:field="*{user.phone}"
+                   minlength="10"
+                   maxlength="12"/>
             <br/>
             
             <h3>Данные о кредите</h3>

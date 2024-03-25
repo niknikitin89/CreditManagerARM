@@ -5,6 +5,9 @@
 package com.nikproj.creditManagerARM.repository;
 
 import com.nikproj.creditManagerARM.model.CreditRequestModel;
+import com.nikproj.creditManagerARM.model.RequestFullModel;
+import java.util.List;
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -13,8 +16,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CreditRequestDAOInterface {
-    Long saveCreditRequest(CreditRequestModel model);
+    Long saveCreditRequest(CreditRequestModel model, Session session);
     CreditRequestModel findById(Long id);
-
-    public void updateCreditRequest(CreditRequestModel request);
+    void updateCreditRequest(CreditRequestModel request, Session session);
+    List<RequestFullModel> getFullRequestInfo();
 }

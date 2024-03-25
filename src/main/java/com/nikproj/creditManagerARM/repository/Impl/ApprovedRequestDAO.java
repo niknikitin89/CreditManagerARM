@@ -6,7 +6,7 @@ package com.nikproj.creditManagerARM.repository.Impl;
 
 import com.nikproj.creditManagerARM.model.ApprovedRequestModel;
 import com.nikproj.creditManagerARM.repository.ApprovedRequestDAOInterface;
-import com.nikproj.creditManagerARM.utilit.HibernateSessionFactoryUtil;
+import com.nikproj.creditManagerARM.utilit.HibernateSessionManager;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -20,30 +20,30 @@ import org.springframework.stereotype.Repository;
 public class ApprovedRequestDAO implements ApprovedRequestDAOInterface {
 
     @Override
-    public Long saveApprovedRequest(ApprovedRequestModel model) {
-        SessionFactory sessionFactory
-                = HibernateSessionFactoryUtil.getSessionFactory();
-
-        long id = 0;
-        try (Session session = sessionFactory.openSession()) {
-            Transaction transaction = session.beginTransaction();
-            session.save(model);
-            System.out.println("Generated ID" + id);
-            transaction.commit();
-        } catch (Exception e) {
-            System.out.println("Исключение!" + e);
-            id = -1;
-        }
+    public Long saveApprovedRequest(ApprovedRequestModel model, Session session) {
+//        SessionFactory sessionFactory
+//                = HibernateSessionManager.getSessionFactory();
+//
+//        long id = 0;
+//        try (Session session = sessionFactory.openSession()) {
+//            Transaction transaction = session.beginTransaction();
+            Long id = (Long)session.save(model);
+//            System.out.println("Generated ID" + id);
+//            transaction.commit();
+//        } catch (Exception e) {
+//            System.out.println("Исключение!" + e);
+//            id = -1;
+//        }
 
         return id;
     }
 
     @Override
     public ApprovedRequestModel findById(Long id) {
-        SessionFactory sessionFactory
-                = HibernateSessionFactoryUtil.getSessionFactory();
+//        SessionFactory sessionFactory
+//                = HibernateSessionManager.getSessionFactory();
 
-        try (Session session = sessionFactory.openSession()) {
+        try (Session session = HibernateSessionManager.openSession()) {
             return session.get(ApprovedRequestModel.class, id);
         } catch (Exception e) {
             System.out.println("Исключение!" + e);
