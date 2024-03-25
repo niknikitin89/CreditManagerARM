@@ -6,7 +6,6 @@ package com.nikproj.creditManagerARM.controller;
 
 import com.nikproj.creditManagerARM.model.CreditRequestModel;
 import com.nikproj.creditManagerARM.model.RequestFormModel;
-import com.nikproj.creditManagerARM.model.UserModel;
 import com.nikproj.creditManagerARM.service.ApprovalRequestService;
 import com.nikproj.creditManagerARM.service.CreateCreditRequestService;
 import org.springframework.beans.factory.annotation.Autowired;

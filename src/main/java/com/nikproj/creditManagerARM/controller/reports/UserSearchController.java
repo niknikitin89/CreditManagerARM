@@ -4,12 +4,8 @@
  */
 package com.nikproj.creditManagerARM.controller.reports;
 
-import com.nikproj.creditManagerARM.model.ContractReportViewForm;
-import com.nikproj.creditManagerARM.model.ContractViewForm;
 import com.nikproj.creditManagerARM.model.UserModel;
 import com.nikproj.creditManagerARM.model.UserSearchCriteria;
-import com.nikproj.creditManagerARM.service.reports.AllContractsReportService;
-import com.nikproj.creditManagerARM.service.reports.AllUsersReportService;
 import com.nikproj.creditManagerARM.service.reports.UserSearchService;
 import java.util.ArrayList;
 import org.springframework.stereotype.Controller;
@@ -18,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.support.SessionStatus;
 
 /**
  *

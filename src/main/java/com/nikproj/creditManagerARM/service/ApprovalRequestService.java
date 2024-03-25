@@ -41,7 +41,7 @@ public class ApprovalRequestService {
         ApprovedRequestModel approvedRequest = analysisAndDecision(requestId);
 
         if (approvedRequest != null) {
-//генерируем договор
+            //генерируем договор
             Long contract_Id = generateContractForRequest(approvedRequest);
 
             return CreditRequestModel.Status.APPROVED;
@@ -51,29 +51,27 @@ public class ApprovalRequestService {
     }
 
     private ApprovedRequestModel analysisAndDecision(Long requestId) {
-//        if (Math.random() > 0.5) {
-        //Обновляем инфу по статусу заявки
-        CreditRequestModel request = creditRequestDAO.findById(requestId);
-        request.setRequestStatus(CreditRequestModel.Status.APPROVED);
-        creditRequestDAO.updateCreditRequest(request);
+        if (Math.random() > 0.5) {
+            //Обновляем инфу по статусу заявки
+            CreditRequestModel request = creditRequestDAO.findById(requestId);
+            request.setRequestStatus(CreditRequestModel.Status.APPROVED);
+            creditRequestDAO.updateCreditRequest(request);
 
-        //Вносим данные в перечень одобренных заявок
-        ApprovedRequestModel approvedRequest = new ApprovedRequestModel();
-//        approvedRequest.setId(requestId);
-        approvedRequest.setCreditRequest(request);
-        approvedRequest.setCreditTerm((int) (Math.random() * 12));
-        approvedRequest.setApprovedSum(Math.random() * request.getRequestedSum());
-        approvedRequestDAO.saveApprovedRequest(approvedRequest);
+            //Вносим данные в перечень одобренных заявок
+            ApprovedRequestModel approvedRequest = new ApprovedRequestModel();
+            approvedRequest.setCreditRequest(request);
+            approvedRequest.setCreditTerm((int) (Math.random() * 12));
+            approvedRequest.setApprovedSum(Math.random() * request.getRequestedSum());
+            approvedRequestDAO.saveApprovedRequest(approvedRequest);
 
-        return approvedRequest;
-//        } else {
-//            return null;
-//        }
+            return approvedRequest;
+        } else {
+            return null;
+        }
     }
 
     private Long generateContractForRequest(ApprovedRequestModel approvedRequest) {
         ContractModel contract = new ContractModel();
-//        contract.setRequestId(requestId);
         contract.setApproveRequest(approvedRequest);
         contract.setContractDate(new Date());
         contract.setStatus(ContractModel.Status.WAIT);

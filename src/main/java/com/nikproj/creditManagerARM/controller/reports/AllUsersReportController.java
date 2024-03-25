@@ -36,7 +36,6 @@ public class AllUsersReportController {
     
     @GetMapping
     public String showAllUsers(@ModelAttribute(name = "users") List<UserModel> users){
-//        System.out.println(users.get(0).getLastName());
         service.fillUserList(users);
         return "allUsers";
     }

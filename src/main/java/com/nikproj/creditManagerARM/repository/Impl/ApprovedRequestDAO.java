@@ -5,9 +5,7 @@
 package com.nikproj.creditManagerARM.repository.Impl;
 
 import com.nikproj.creditManagerARM.model.ApprovedRequestModel;
-import com.nikproj.creditManagerARM.model.CreditRequestModel;
 import com.nikproj.creditManagerARM.repository.ApprovedRequestDAOInterface;
-import com.nikproj.creditManagerARM.repository.CreditRequestDAOInterface;
 import com.nikproj.creditManagerARM.utilit.HibernateSessionFactoryUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -29,8 +27,7 @@ public class ApprovedRequestDAO implements ApprovedRequestDAOInterface {
         long id = 0;
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
-//            id = (long) 
-                    session.save(model);
+            session.save(model);
             System.out.println("Generated ID" + id);
             transaction.commit();
         } catch (Exception e) {

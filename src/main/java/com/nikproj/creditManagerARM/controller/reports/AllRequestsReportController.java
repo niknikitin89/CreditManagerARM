@@ -5,9 +5,7 @@
 package com.nikproj.creditManagerARM.controller.reports;
 
 import com.nikproj.creditManagerARM.model.RequestFullModel;
-import com.nikproj.creditManagerARM.model.UserModel;
 import com.nikproj.creditManagerARM.service.reports.AllRequestsReportService;
-import com.nikproj.creditManagerARM.service.reports.AllUsersReportService;
 import java.util.ArrayList;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
