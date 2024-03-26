@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.nikproj.creditManagerARM.model;
+package com.nikproj.creditManagerARM.model.viewModel;
 
 import java.util.Date;
 
@@ -18,7 +18,7 @@ public class RequestFullModel {
     private Double requestedSum;
     private String requestStatus;
     private Integer creditTerm;
-    private Double approvedSum;  
+    private Double approvedSum;
 
     public RequestFullModel(Long id, Long userId, Date requestDate, Double requestedSum, String requestStatus, Integer creditTerm, Double approvedSum) {
         this.id = id;
@@ -29,10 +29,7 @@ public class RequestFullModel {
         this.creditTerm = creditTerm;
         this.approvedSum = approvedSum;
     }
-    
-    
-    
-    
+
     public Long getId() {
         return id;
     }
@@ -88,6 +85,5 @@ public class RequestFullModel {
     public void setApprovedSum(Double approvedSum) {
         this.approvedSum = approvedSum;
     }
-    
-    
+
 }

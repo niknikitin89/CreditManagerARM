@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.nikproj.creditManagerARM.utilit;
+package com.nikproj.creditManagerARM.util;
 
 //import org.hibernate.SessionFactory;
-import com.nikproj.creditManagerARM.model.ApprovedRequestModel;
-import com.nikproj.creditManagerARM.model.ContractModel;
-import com.nikproj.creditManagerARM.model.CreditRequestModel;
-import com.nikproj.creditManagerARM.model.UserModel;
+import com.nikproj.creditManagerARM.model.entity.ApprovedRequestModel;
+import com.nikproj.creditManagerARM.model.entity.ContractModel;
+import com.nikproj.creditManagerARM.model.entity.CreditRequestModel;
+import com.nikproj.creditManagerARM.model.entity.UserModel;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

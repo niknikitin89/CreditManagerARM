@@ -4,7 +4,8 @@
  */
 package com.nikproj.creditManagerARM.controller.reports;
 
-import com.nikproj.creditManagerARM.model.ContractReportViewForm;
+import com.nikproj.creditManagerARM.model.Constants;
+import com.nikproj.creditManagerARM.model.viewModel.ContractReportViewForm;
 import com.nikproj.creditManagerARM.service.reports.AllContractsReportService;
 import java.util.ArrayList;
 import org.springframework.stereotype.Controller;
@@ -20,10 +21,10 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @author user
  */
 @Controller
-@RequestMapping("/cmarm/all_contracts")
+@RequestMapping(Constants.PAGE_URL_REPORT_ALL_CONTRACTS)
 public class AllContractsReportController {
 
-    private AllContractsReportService service;
+    private final AllContractsReportService service;
 
     @Autowired
     public AllContractsReportController(AllContractsReportService service) {
@@ -32,7 +33,7 @@ public class AllContractsReportController {
 
     @ModelAttribute(name = "contracts")
     public List<ContractReportViewForm> contracts() {
-        return new ArrayList<ContractReportViewForm>();
+        return new ArrayList<>();
     }
 
     @GetMapping
@@ -40,11 +41,11 @@ public class AllContractsReportController {
             @ModelAttribute(name = "contracts") List<ContractReportViewForm> contracts) {
 
         service.fillContractList(contracts);
-        return "allContracts";
+        return Constants.PAGE_NAME_ALL_CONTRACTS;
     }
 
     @PostMapping(params = "home")
     public String onHomePage() {
-        return "redirect:/cmarm";
+        return "redirect:" + Constants.PAGE_URL_HOME;
     }
 }

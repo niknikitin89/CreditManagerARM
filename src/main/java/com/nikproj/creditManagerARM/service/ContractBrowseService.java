@@ -4,10 +4,10 @@
  */
 package com.nikproj.creditManagerARM.service;
 
-import com.nikproj.creditManagerARM.model.ContractModel;
-import com.nikproj.creditManagerARM.model.ContractViewForm;
+import com.nikproj.creditManagerARM.model.entity.ContractModel;
+import com.nikproj.creditManagerARM.model.viewModel.ContractViewForm;
 import com.nikproj.creditManagerARM.repository.ContractDAOInterface;
-import com.nikproj.creditManagerARM.utilit.HibernateSessionManager;
+import com.nikproj.creditManagerARM.util.HibernateSessionManager;
 import java.util.Date;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

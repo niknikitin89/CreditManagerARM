@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
  * @author user
  */
 @Repository
-public class FamilyStatusesDAO implements FamilyStatusesDAOInterface{
+public class FamilyStatusesDAO implements FamilyStatusesDAOInterface {
 
     @Override
     public List<FamilyStatus> getFamilyStatuses() {
@@ -23,5 +23,5 @@ public class FamilyStatusesDAO implements FamilyStatusesDAOInterface{
         FamilyStatuses statuses = new FamilyStatuses();
         return statuses.getStatuses();
     }
-    
+
 }

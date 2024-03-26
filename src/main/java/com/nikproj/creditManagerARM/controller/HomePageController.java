@@ -4,6 +4,7 @@
  */
 package com.nikproj.creditManagerARM.controller;
 
+import com.nikproj.creditManagerARM.model.Constants;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,36 +15,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author user
  */
 @Controller
-@RequestMapping("/cmarm")
+@RequestMapping(Constants.PAGE_URL_HOME)
 public class HomePageController {
 
     @GetMapping
     public String showHomePage() {
-        return "homePage";
+        return Constants.PAGE_NAME_HOME;
     }
 
     @PostMapping(params = "createRequest")
     public String onCreateRequestPage() {
-        return "redirect:/cmarm/create_credit_request";
+        return "redirect:" + Constants.PAGE_URL_CREATE_REQUEST;
     }
 
     @PostMapping(params = "allUsers")
     public String onAllUsersPage() {
-        return "redirect:/cmarm/all_users";
+        return "redirect:" + Constants.PAGE_URL_REPORT_ALL_USERS;
     }
 
     @PostMapping(params = "searchUser")
     public String onSearchUserPage() {
-        return "redirect:/cmarm/user_search";
+        return "redirect:" + Constants.PAGE_URL_SEARCH_USER;
     }
 
     @PostMapping(params = "allRequests")
     public String onAllRequestPage() {
-        return "redirect:/cmarm/all_requests";
+        return "redirect:" + Constants.PAGE_URL_REPORT_ALL_REQUESTS;
     }
 
     @PostMapping(params = "allContracts")
     public String onAllContractsPage() {
-        return "redirect:/cmarm/all_contracts";
+        return "redirect:" + Constants.PAGE_URL_REPORT_ALL_CONTRACTS;
     }
 }

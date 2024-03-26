@@ -4,6 +4,7 @@
  */
 package com.nikproj.creditManagerARM.controller;
 
+import com.nikproj.creditManagerARM.model.Constants;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,21 +15,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author user
  */
 @Controller
-@RequestMapping("/cmarm/request_rejected")
+@RequestMapping(Constants.PAGE_URL_REQUEST_REJECTED)
 public class RequestRejectedController {
-    
+
     @GetMapping
-    public String showPage(){
-        return "requestRejected";
+    public String showPage() {
+        return Constants.PAGE_NAME_REQUEST_REJECTED;
     }
-    
+
     @PostMapping(params = "home")
     public String onHomePage() {
-        return "redirect:/cmarm";
+        return "redirect:" + Constants.PAGE_URL_HOME;
     }
-    
+
     @PostMapping(params = "createRequest")
     public String onCreateRequestPage() {
-        return "redirect:/cmarm/create_credit_request";
+        return "redirect:" + Constants.PAGE_URL_CREATE_REQUEST;
     }
 }

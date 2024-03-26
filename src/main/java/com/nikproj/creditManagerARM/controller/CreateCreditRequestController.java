@@ -4,9 +4,11 @@
  */
 package com.nikproj.creditManagerARM.controller;
 
-import com.nikproj.creditManagerARM.model.CreditRequestModel;
+import com.nikproj.creditManagerARM.model.Constants;
+import com.nikproj.creditManagerARM.model.entity.CreditRequestModel;
 import com.nikproj.creditManagerARM.model.FamilyStatus;
-import com.nikproj.creditManagerARM.model.RequestFormModel;
+import com.nikproj.creditManagerARM.model.viewModel.RequestFormModel;
+import com.nikproj.creditManagerARM.model.entity.UserModel;
 import com.nikproj.creditManagerARM.service.ApprovalRequestService;
 import com.nikproj.creditManagerARM.service.CreateCreditRequestService;
 import java.util.List;
@@ -25,11 +27,11 @@ import org.springframework.web.bind.support.SessionStatus;
  */
 @Controller
 @SessionAttributes("request")
-@RequestMapping("/cmarm/create_credit_request")
+@RequestMapping(Constants.PAGE_URL_CREATE_REQUEST)
 public class CreateCreditRequestController {
 
-    private CreateCreditRequestService createRequestService;
-    private ApprovalRequestService approvalRequestService;
+    private final CreateCreditRequestService createRequestService;
+    private final ApprovalRequestService approvalRequestService;
 
     @Autowired
     public CreateCreditRequestController(
@@ -52,7 +54,7 @@ public class CreateCreditRequestController {
 
     @GetMapping
     public String showCreateCreditAppPage() {
-        return "createCreditRequest";
+        return Constants.PAGE_NAME_CREATE_REQUEST;
     }
 
     @PostMapping
@@ -68,16 +70,39 @@ public class CreateCreditRequestController {
                 = approvalRequestService.approveRequest(requestId);
 
         if (approveStatus == CreditRequestModel.Status.APPROVED) {
-            return "redirect:/cmarm/contract";
+            return "redirect:" + Constants.PAGE_URL_CONTRACT;
         } else {
             sessionStatus.setComplete();
-            return "redirect:/cmarm/request_rejected";
+            return "redirect:" + Constants.PAGE_URL_REQUEST_REJECTED;
         }
     }
 
     @PostMapping(params = "home")
     public String onHomePage(SessionStatus sessionStatus) {
         sessionStatus.setComplete();
-        return "redirect:/cmarm";
+        return "redirect:" + Constants.PAGE_URL_HOME;
+    }
+
+    @GetMapping(params = "default")
+    public String setDefaultData(
+            @ModelAttribute(name = "request") RequestFormModel model) {
+        
+        UserModel user = model.getUser();
+        user.setFirstName("Иван");
+        user.setLastName("Иванов");
+        user.setPatronymic("Иванович");
+        user.setPassportSeria(1111);
+        user.setPassportNumber(222222);
+        user.setFamilyStatus("MARRIED");
+        user.setAddress("Адрес");
+        user.setPhone("89171112233");
+        user.setLastWorkPlace("Последнее место работы");
+        user.setWorkPeriod(10);
+        user.setJobTitile("Должность");
+
+        CreditRequestModel request = model.getRequest();
+        request.setRequestedSum(Double.valueOf(12000));
+
+        return "redirect:" + Constants.PAGE_URL_CREATE_REQUEST;
     }
 }

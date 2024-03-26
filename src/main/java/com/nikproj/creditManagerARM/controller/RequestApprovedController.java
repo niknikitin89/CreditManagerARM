@@ -4,6 +4,8 @@
  */
 package com.nikproj.creditManagerARM.controller;
 
+
+import com.nikproj.creditManagerARM.model.Constants;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,21 +16,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author user
  */
 @Controller
-@RequestMapping("/cmarm/request_approved")
+@RequestMapping(Constants.PAGE_URL_REQUEST_APPROVED)
 public class RequestApprovedController {
 
     @GetMapping
     public String showPage() {
-        return "requestApproved";
+        return Constants.PAGE_NAME_REQUEST_APPROVED;
     }
 
     @PostMapping(params = "home")
     public String onHomePage() {
-        return "redirect:/cmarm";
+        return "redirect:" + Constants.PAGE_URL_HOME;
     }
 
     @PostMapping(params = "createRequest")
     public String onCreateRequestPage() {
-        return "redirect:/cmarm/create_credit_request";
+        return "redirect:" + Constants.PAGE_URL_CREATE_REQUEST;
     }
 }

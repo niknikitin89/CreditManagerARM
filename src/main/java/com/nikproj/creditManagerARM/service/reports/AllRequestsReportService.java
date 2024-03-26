@@ -4,9 +4,8 @@
  */
 package com.nikproj.creditManagerARM.service.reports;
 
-import com.nikproj.creditManagerARM.model.RequestFullModel;
+import com.nikproj.creditManagerARM.model.viewModel.RequestFullModel;
 import com.nikproj.creditManagerARM.repository.CreditRequestDAOInterface;
-import com.nikproj.creditManagerARM.repository.Impl.CreditRequestDAO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,9 +23,9 @@ public class AllRequestsReportService {
     public AllRequestsReportService(CreditRequestDAOInterface requesDAO) {
         this.requesDAO = requesDAO;
     }
-    
+
     public void fillRequestList(List<RequestFullModel> requests) {
-     List<RequestFullModel> requesData = requesDAO.getFullRequestInfo();
+        List<RequestFullModel> requesData = requesDAO.getFullRequestInfo();
         if (!requesData.isEmpty()) {
             requests.addAll(requesData);
         }

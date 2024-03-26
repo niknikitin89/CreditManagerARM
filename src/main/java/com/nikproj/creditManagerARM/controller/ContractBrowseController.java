@@ -4,8 +4,9 @@
  */
 package com.nikproj.creditManagerARM.controller;
 
-import com.nikproj.creditManagerARM.model.ContractViewForm;
-import com.nikproj.creditManagerARM.model.RequestFormModel;
+import com.nikproj.creditManagerARM.model.Constants;
+import com.nikproj.creditManagerARM.model.viewModel.ContractViewForm;
+import com.nikproj.creditManagerARM.model.viewModel.RequestFormModel;
 import com.nikproj.creditManagerARM.service.ContractBrowseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,10 +23,10 @@ import org.springframework.web.bind.support.SessionStatus;
  */
 @Controller
 @SessionAttributes(names = {"request","contract"})
-@RequestMapping("/cmarm/contract")
+@RequestMapping(Constants.PAGE_URL_CONTRACT)
 public class ContractBrowseController {
 
-    private ContractBrowseService сontractBrowseService;
+    private final ContractBrowseService сontractBrowseService;
 
     @Autowired
     public ContractBrowseController(ContractBrowseService сontractBrowseService) {
@@ -46,23 +47,28 @@ public class ContractBrowseController {
         //Запрашиваем инфу по договору
         ContractViewForm contractInfo = сontractBrowseService.getContractInfo(request.getRequest().getId());
         ContractViewForm.copy(contractInfo, contractView);
-        return "contract";
+        
+        return Constants.PAGE_NAME_CONTRACT;
 
     }
 
     @PostMapping(params = "sign")
     public String signingContract(@ModelAttribute(name = "contract") ContractViewForm contractView,
             SessionStatus sessionStatus) {
+        
         sessionStatus.setComplete();
         сontractBrowseService.signContract(contractView.getId());
-        return "redirect:/cmarm/create_credit_request";
+        
+        return "redirect:" + Constants.PAGE_URL_CREATE_REQUEST;
     }
 
     @PostMapping(params = "cancel")
     public String cancelContract(@ModelAttribute(name = "contract") ContractViewForm contractView,
             SessionStatus sessionStatus) {
+        
         sessionStatus.setComplete();
         сontractBrowseService.cancelContract(contractView.getId());
-        return "redirect:/cmarm/create_credit_request";
+        
+        return "redirect:"+ Constants.PAGE_URL_CREATE_REQUEST;
     }
 }

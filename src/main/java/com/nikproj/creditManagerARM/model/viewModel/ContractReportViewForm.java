@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.nikproj.creditManagerARM.model;
+package com.nikproj.creditManagerARM.model.viewModel;
 
 import java.util.Date;
 
@@ -65,6 +65,5 @@ public class ContractReportViewForm {
     public void setSigningDate(Date signingDate) {
         this.signingDate = signingDate;
     }
-    
-   
+
 }

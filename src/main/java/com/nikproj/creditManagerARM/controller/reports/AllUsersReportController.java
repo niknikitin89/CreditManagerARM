@@ -4,7 +4,8 @@
  */
 package com.nikproj.creditManagerARM.controller.reports;
 
-import com.nikproj.creditManagerARM.model.UserModel;
+import com.nikproj.creditManagerARM.model.Constants;
+import com.nikproj.creditManagerARM.model.entity.UserModel;
 import com.nikproj.creditManagerARM.service.reports.AllUsersReportService;
 import java.util.ArrayList;
 import org.springframework.stereotype.Controller;
@@ -20,29 +21,29 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @author user
  */
 @Controller
-@RequestMapping("/cmarm/all_users")
+@RequestMapping(Constants.PAGE_URL_REPORT_ALL_USERS)
 public class AllUsersReportController {
-    
-    private AllUsersReportService service;
+
+    private final AllUsersReportService service;
 
     @Autowired
     public AllUsersReportController(AllUsersReportService service) {
         this.service = service;
     }
-   
+
     @ModelAttribute(name = "users")
-    public List<UserModel> users(){
-        return new ArrayList<UserModel>();
+    public List<UserModel> users() {
+        return new ArrayList<>();
     }
-    
+
     @GetMapping
-    public String showAllUsers(@ModelAttribute(name = "users") List<UserModel> users){
+    public String showAllUsers(@ModelAttribute(name = "users") List<UserModel> users) {
         service.fillUserList(users);
-        return "allUsers";
+        return Constants.PAGE_NAME_ALL_USERS;
     }
-    
+
     @PostMapping(params = "home")
     public String onHomePage() {
-        return "redirect:/cmarm";
-    }    
+        return "redirect:" + Constants.PAGE_URL_HOME;
+    }
 }

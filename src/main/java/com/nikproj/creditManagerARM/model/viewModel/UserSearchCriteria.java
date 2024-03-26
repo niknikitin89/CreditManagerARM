@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.nikproj.creditManagerARM.model;
+package com.nikproj.creditManagerARM.model.viewModel;
 
 /**
  *
@@ -66,16 +66,12 @@ public class UserSearchCriteria {
     }
 
     public boolean isEmpty() {
-        if (this.firstName.isEmpty()
+        return this.firstName.isEmpty()
                 && this.lastName.isEmpty()
                 && this.patronymic.isEmpty()
                 && this.passportSeria.isEmpty()
                 && this.passportNumber.isEmpty()
-                && this.phone.isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
+                && this.phone.isEmpty();
     }
 
 }

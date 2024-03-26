@@ -4,7 +4,7 @@
  */
 package com.nikproj.creditManagerARM.repository;
 
-import com.nikproj.creditManagerARM.model.UserModel;
+import com.nikproj.creditManagerARM.model.entity.UserModel;
 import java.util.List;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;

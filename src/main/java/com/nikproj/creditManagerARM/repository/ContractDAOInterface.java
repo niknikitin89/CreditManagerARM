@@ -4,9 +4,9 @@
  */
 package com.nikproj.creditManagerARM.repository;
 
-import com.nikproj.creditManagerARM.model.ContractModel;
-import com.nikproj.creditManagerARM.model.ContractReportViewForm;
-import com.nikproj.creditManagerARM.model.ContractViewForm;
+import com.nikproj.creditManagerARM.model.entity.ContractModel;
+import com.nikproj.creditManagerARM.model.viewModel.ContractReportViewForm;
+import com.nikproj.creditManagerARM.model.viewModel.ContractViewForm;
 import java.util.List;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -19,7 +19,6 @@ import org.springframework.stereotype.Repository;
 public interface ContractDAOInterface {
     Long saveContract(ContractModel model, Session session);
     ContractModel findById(Long id);
-
     void updateContract(ContractModel model, Session session);
     ContractViewForm getFullContractInfoByRequestId(Long requestId);
     List<ContractReportViewForm> getAllContracts();

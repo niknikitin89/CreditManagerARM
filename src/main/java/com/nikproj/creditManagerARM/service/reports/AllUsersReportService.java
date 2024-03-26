@@ -4,8 +4,7 @@
  */
 package com.nikproj.creditManagerARM.service.reports;
 
-import com.nikproj.creditManagerARM.model.UserModel;
-import com.nikproj.creditManagerARM.repository.Impl.UserDAO;
+import com.nikproj.creditManagerARM.model.entity.UserModel;
 import com.nikproj.creditManagerARM.repository.UserDAOInterface;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

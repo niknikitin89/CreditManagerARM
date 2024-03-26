@@ -5,14 +5,15 @@
 package com.nikproj.creditManagerARM.service;
 
 import com.nikproj.creditManagerARM.model.Constants;
-import com.nikproj.creditManagerARM.model.CreditRequestModel;
+import com.nikproj.creditManagerARM.model.entity.CreditRequestModel;
 import com.nikproj.creditManagerARM.model.FamilyStatus;
-import com.nikproj.creditManagerARM.model.RequestFormModel;
-import com.nikproj.creditManagerARM.model.UserModel;
+import com.nikproj.creditManagerARM.model.viewModel.RequestFormModel;
+import com.nikproj.creditManagerARM.model.entity.UserModel;
 import com.nikproj.creditManagerARM.repository.CreditRequestDAOInterface;
 import com.nikproj.creditManagerARM.repository.FamilyStatusesDAOInterface;
 import com.nikproj.creditManagerARM.repository.UserDAOInterface;
-import com.nikproj.creditManagerARM.utilit.HibernateSessionManager;
+import com.nikproj.creditManagerARM.util.HibernateSessionManager;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -43,8 +44,8 @@ public class CreateCreditRequestService {
     public Long saveRequest(RequestFormModel model) {
         Long requestID = Long.valueOf(-1);
 
-////Открываем сессию и начинаем транзакцию
         try {
+            ////Открываем сессию и начинаем транзакцию
             Session session = HibernateSessionManager.openSession();
             Transaction transaction = session.beginTransaction();
 
@@ -60,19 +61,20 @@ public class CreateCreditRequestService {
             ////Формируем заявку
             CreditRequestModel request = model.getRequest();
             request.setUser(user);
+            request.setRequestDate(new Date());
             request.setRequestStatus(CreditRequestModel.Status.WAIT);
 
             ////Обновление
             requestID = creditRequestDAO.saveCreditRequest(request, session);
+            if (requestID < 0) {
+                System.err.println(Constants.ERR_SAVE_DATABASE);
+                return Long.valueOf(-1);
+            }
 
             ////COMMIT
             transaction.commit();
         } catch (Exception e) {
             System.out.println("Исключение!" + e);
-        }
-        if (requestID < 0) {
-            System.err.println(Constants.ERR_SAVE_DATABASE);
-            return Long.valueOf(-1);
         }
 
         return requestID;
@@ -81,13 +83,13 @@ public class CreateCreditRequestService {
     private Long saveUser(UserModel user, Session session) {
         //Ищем существующего пользователя
         List<UserModel> usersFromDB = userDAO.findByFIOPassport(
-                user.getFirstName(), 
-                user.getLastName(), 
-                user.getPatronymic(), 
-                user.getPassportSeria(), 
+                user.getFirstName(),
+                user.getLastName(),
+                user.getPatronymic(),
+                user.getPassportSeria(),
                 user.getPassportNumber());
-             
-        Long userID = Long.valueOf(-1);
+
+        Long userID;
         if (usersFromDB == null || usersFromDB.isEmpty()) {
             //Создаем нового пользователя
             userID = userDAO.saveUser(user, session);

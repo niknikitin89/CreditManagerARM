@@ -11,12 +11,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <body>
         <h1>Критерии поиска</h1>
         <form method="GET" th:object="${search_criteria}">
-            <label for="firstName">Имя</label>
-            <input type="text" th:field="*{firstName}"/>
-            <br/>
-
             <label for="lastName">Фамилия</label>
             <input type="text" th:field="*{lastName}"/>
+            <br/>
+
+            <label for="firstName">Имя</label>
+            <input type="text" th:field="*{firstName}"/>
             <br/>
 
             <label for="patronymic">Отчество</label>
@@ -44,9 +44,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <input type="submit" value="Поиск" name = "search"/>
         </form>
 
+        <br/>
         <form method="POST">
             <input type="submit" value="На главную" name = "home"/>
         </form>
+        <br/>
 
         <h1>Результат поиска</h1>
         <table>

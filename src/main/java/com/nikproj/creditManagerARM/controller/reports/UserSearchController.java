@@ -4,8 +4,9 @@
  */
 package com.nikproj.creditManagerARM.controller.reports;
 
-import com.nikproj.creditManagerARM.model.UserModel;
-import com.nikproj.creditManagerARM.model.UserSearchCriteria;
+import com.nikproj.creditManagerARM.model.Constants;
+import com.nikproj.creditManagerARM.model.entity.UserModel;
+import com.nikproj.creditManagerARM.model.viewModel.UserSearchCriteria;
 import com.nikproj.creditManagerARM.service.reports.UserSearchService;
 import java.util.ArrayList;
 import org.springframework.stereotype.Controller;
@@ -21,10 +22,10 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @author user
  */
 @Controller
-@RequestMapping("/cmarm/user_search")
+@RequestMapping(Constants.PAGE_URL_SEARCH_USER)
 public class UserSearchController {
 
-    private UserSearchService service;
+    private final UserSearchService service;
 
     @Autowired
     public UserSearchController(UserSearchService service) {
@@ -33,7 +34,7 @@ public class UserSearchController {
 
     @ModelAttribute(name = "users")
     public List<UserModel> users() {
-        return new ArrayList<UserModel>();
+        return new ArrayList<>();
     }
 
     @ModelAttribute(name = "search_criteria")
@@ -46,14 +47,12 @@ public class UserSearchController {
             @ModelAttribute(name = "search_criteria") UserSearchCriteria searchCriteria,
             @ModelAttribute(name = "users") List<UserModel> users) {
 
-//        if (!searchCriteria.isEmpty()) {
         service.searchUsers(searchCriteria, users);
-//        }
-        return "userList";
+        return Constants.PAGE_NAME_USER_LIST;
     }
 
     @PostMapping(params = "home")
     public String onHomePage() {
-        return "redirect:/cmarm";
+        return "redirect:" + Constants.PAGE_URL_HOME;
     }
 }

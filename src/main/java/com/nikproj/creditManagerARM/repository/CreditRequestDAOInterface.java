@@ -4,8 +4,8 @@
  */
 package com.nikproj.creditManagerARM.repository;
 
-import com.nikproj.creditManagerARM.model.CreditRequestModel;
-import com.nikproj.creditManagerARM.model.RequestFullModel;
+import com.nikproj.creditManagerARM.model.entity.CreditRequestModel;
+import com.nikproj.creditManagerARM.model.viewModel.RequestFullModel;
 import java.util.List;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;

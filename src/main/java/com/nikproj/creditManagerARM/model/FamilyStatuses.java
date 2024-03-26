@@ -15,11 +15,11 @@ import java.util.Map;
  */
 public class FamilyStatuses {
 
-    private Map<String,FamilyStatus> statuses;
+    private Map<String, FamilyStatus> statuses;
 
     public FamilyStatuses() {
         statuses = new HashMap<>();
-        statuses.put("MARRIED",new FamilyStatus("MARRIED", "Женат/Замужем"));
+        statuses.put("MARRIED", new FamilyStatus("MARRIED", "Женат/Замужем"));
         statuses.put("FREE", new FamilyStatus("FREE", "Холост/Не замужем"));
     }
 
@@ -27,9 +27,8 @@ public class FamilyStatuses {
         return new ArrayList<>(statuses.values());
     }
 
-    public void setStatuses(Map<String,FamilyStatus> statuses) {
+    public void setStatuses(Map<String, FamilyStatus> statuses) {
         this.statuses = statuses;
     }
-    
- 
+
 }

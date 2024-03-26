@@ -4,9 +4,8 @@
  */
 package com.nikproj.creditManagerARM.service.reports;
 
-import com.nikproj.creditManagerARM.model.UserModel;
-import com.nikproj.creditManagerARM.model.UserSearchCriteria;
-import com.nikproj.creditManagerARM.repository.Impl.UserDAO;
+import com.nikproj.creditManagerARM.model.entity.UserModel;
+import com.nikproj.creditManagerARM.model.viewModel.UserSearchCriteria;
 import com.nikproj.creditManagerARM.repository.UserDAOInterface;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,21 +26,21 @@ public class UserSearchService {
     }
 
     public void searchUsers(UserSearchCriteria searchCriteria, List<UserModel> resultOfSearch) {
-        
+
         Integer passportSeria;
         if (searchCriteria.getPassportSeria().isEmpty()) {
             passportSeria = 0;
         } else {
             passportSeria = Integer.valueOf(searchCriteria.getPassportSeria());
         }
-        
+
         Integer passportNumber;
         if (searchCriteria.getPassportNumber().isEmpty()) {
             passportNumber = 0;
         } else {
             passportNumber = Integer.valueOf(searchCriteria.getPassportNumber());
         }
-        
+
         List<UserModel> usersFromDB
                 = userDAO.findByFIOPassportPhone(
                         searchCriteria.getFirstName(),

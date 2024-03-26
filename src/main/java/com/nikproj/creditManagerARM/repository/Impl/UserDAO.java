@@ -4,10 +4,11 @@
  */
 package com.nikproj.creditManagerARM.repository.Impl;
 
-import com.nikproj.creditManagerARM.model.UserModel;
+import com.nikproj.creditManagerARM.model.entity.UserModel;
 import com.nikproj.creditManagerARM.repository.UserDAOInterface;
-import com.nikproj.creditManagerARM.utilit.HibernateSessionManager;
+import com.nikproj.creditManagerARM.util.HibernateSessionManager;
 import io.micrometer.common.util.StringUtils;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,14 +45,10 @@ public class UserDAO implements UserDAOInterface {
             String hql = "from UserModel";
             Query<UserModel> query = session.createQuery(hql);
             List<UserModel> list = query.list();
-            if (list.isEmpty()) {
-                return null;
-            }
-
             return list;
         } catch (Exception e) {
             System.out.println("Исключение!" + e);
-            return null;
+            return new ArrayList<>();
         }
     }
 
@@ -66,14 +63,10 @@ public class UserDAO implements UserDAOInterface {
             Query<UserModel> query = session.createQuery(hql);
             addSelectParameters(query, parameterMap);
             List<UserModel> list = query.list();
-            if (list.isEmpty()) {
-                return null;
-            }
-
             return list;
         } catch (Exception e) {
             System.out.println("Исключение!" + e);
-            return null;
+            return new ArrayList<>();
         }
     }
 
@@ -88,14 +81,10 @@ public class UserDAO implements UserDAOInterface {
             Query<UserModel> query = session.createQuery(hql);
             addSelectParameters(query, parameterMap);
             List<UserModel> list = query.list();
-            if (list.isEmpty()) {
-                return null;
-            }
-
             return list;
         } catch (Exception e) {
             System.out.println("Исключение!" + e);
-            return null;
+            return new ArrayList<>();
         }
     }
 
@@ -145,7 +134,7 @@ public class UserDAO implements UserDAOInterface {
         selectBuilder.append("from UserModel").append(System.lineSeparator());
         //Если условия не заданы будем выбирать все
         whereBuilder.append("where 1 = 1").append(System.lineSeparator());
-
+        //Остальные параметры
         for (Map.Entry<String, Object> entry : parameterMap.entrySet()) {
             Object key = entry.getKey();
             whereBuilder.append("and " + key + " = :" + key)

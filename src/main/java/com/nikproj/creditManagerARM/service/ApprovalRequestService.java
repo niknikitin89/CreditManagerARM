@@ -4,13 +4,13 @@
  */
 package com.nikproj.creditManagerARM.service;
 
-import com.nikproj.creditManagerARM.model.ApprovedRequestModel;
-import com.nikproj.creditManagerARM.model.ContractModel;
-import com.nikproj.creditManagerARM.model.CreditRequestModel;
+import com.nikproj.creditManagerARM.model.entity.ApprovedRequestModel;
+import com.nikproj.creditManagerARM.model.entity.ContractModel;
+import com.nikproj.creditManagerARM.model.entity.CreditRequestModel;
 import com.nikproj.creditManagerARM.repository.ApprovedRequestDAOInterface;
 import com.nikproj.creditManagerARM.repository.ContractDAOInterface;
 import com.nikproj.creditManagerARM.repository.CreditRequestDAOInterface;
-import com.nikproj.creditManagerARM.utilit.HibernateSessionManager;
+import com.nikproj.creditManagerARM.util.HibernateSessionManager;
 import java.util.Date;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -67,9 +67,9 @@ public class ApprovalRequestService {
         try {
             Session session = HibernateSessionManager.openSession();
             Transaction transaction = session.beginTransaction();
-            
+
             creditRequestDAO.updateCreditRequest(request, session);
-            
+
             transaction.commit();
         } catch (Exception e) {
             System.out.println("Исключение!" + e);
@@ -84,15 +84,25 @@ public class ApprovalRequestService {
         try {
             Session session = HibernateSessionManager.openSession();
             Transaction transaction = session.beginTransaction();
-            
+
+            //Обновляем статус заявки на кредит
             creditRequestDAO.updateCreditRequest(request, session);
-            
+
             //Вносим данные в перечень одобренных заявок
             approvedRequest.setCreditRequest(request);
-            approvedRequest.setCreditTerm((int) (Math.random() * 12));
-            approvedRequest.setApprovedSum(Math.random() * request.getRequestedSum());
+            int creditTerm = (int) (Math.random() * 12);
+            if (creditTerm == 0) {
+                creditTerm++;
+            }
+            approvedRequest.setCreditTerm(creditTerm);
+
+            double approvedSum = Math.random() * request.getRequestedSum();
+            //округлим до 2х знаков после запятой
+            approvedSum = Math.round(approvedSum * 100.0) / 100.0;
+            approvedRequest.setApprovedSum(approvedSum);
+
             approvedRequestDAO.saveApprovedRequest(approvedRequest, session);
-            
+
             transaction.commit();
         } catch (Exception e) {
             System.out.println("Исключение!" + e);

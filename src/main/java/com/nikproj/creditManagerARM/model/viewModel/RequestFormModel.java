@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.nikproj.creditManagerARM.model;
+package com.nikproj.creditManagerARM.model.viewModel;
 
-import lombok.Data;
+import com.nikproj.creditManagerARM.model.entity.UserModel;
+import com.nikproj.creditManagerARM.model.entity.CreditRequestModel;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 

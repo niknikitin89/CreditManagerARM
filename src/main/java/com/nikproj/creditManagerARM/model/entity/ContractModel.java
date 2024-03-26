@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.nikproj.creditManagerARM.model;
+package com.nikproj.creditManagerARM.model.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -16,22 +17,25 @@ import java.util.Date;
  *
  * @author user
  */
-//@Data
 @Entity
 @Table(name = "contracts")
 public class ContractModel {
 
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private Long id;
-//    private Long requestId;
     
     @OneToOne
     @JoinColumn(name = "request_id")
     private ApprovedRequestModel approveRequest;
     
+    
+    @Column(name = "contractdate")
     private Date contractDate;
+    @Column(name = "status", length = 10)
     private String status;
+    @Column(name = "signingdate")
     private Date signingDate;
 
     public enum Status {
