@@ -10,8 +10,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.util.Arrays;
+import java.util.Collection;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  *
@@ -20,7 +25,7 @@ import lombok.Data;
 @Entity
 @Table(name = "users")
 @Data
-public class UserModel {
+public class UserModel implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,103 +55,36 @@ public class UserModel {
     private String lastWorkPlace;//последнее место работы
     @Column(name = "workperiod")
     private Integer workPeriod;//период работы
-    @Column(name = "jobtitile", length = 200)
-    private String jobTitile;//должность
+    @Column(name = "jobtitle", length = 200)
+    private String jobTitle;//должность
+    private String username;
+    private String password;
+    
 
-//    public Long getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(Long userId) {
-//        this.userId = userId;
-//    }
-//
-//    public String getFirstName() {
-//        return firstName;
-//    }
-//
-//    public void setFirstName(String firstName) {
-//        this.firstName = firstName;
-//    }
-//
-//    public String getLastName() {
-//        return lastName;
-//    }
-//
-//    public void setLastName(String lastName) {
-//        this.lastName = lastName;
-//    }
-//
-//    public String getPatronymic() {
-//        return patronymic;
-//    }
-//
-//    public void setPatronymic(String patronymic) {
-//        this.patronymic = patronymic;
-//    }
-//
-//    public Integer getPassportSeria() {
-//        return passportSeria;
-//    }
-//
-//    public void setPassportSeria(Integer passportSeria) {
-//        this.passportSeria = passportSeria;
-//    }
-//
-//    public Integer getPassportNumber() {
-//        return passportNumber;
-//    }
-//
-//    public void setPassportNumber(Integer passportNumber) {
-//        this.passportNumber = passportNumber;
-//    }
-//
-//    public String getFamilyStatus() {
-//        return familyStatus;
-//    }
-//
-//    public void setFamilyStatus(String familyStatus) {
-//        this.familyStatus = familyStatus;
-//    }
-//
-//    public String getAddress() {
-//        return address;
-//    }
-//
-//    public void setAddress(String address) {
-//        this.address = address;
-//    }
-//
-//    public String getPhone() {
-//        return phone;
-//    }
-//
-//    public void setPhone(String phone) {
-//        this.phone = phone;
-//    }
-//
-//    public String getLastWorkPlace() {
-//        return lastWorkPlace;
-//    }
-//
-//    public void setLastWorkPlace(String lastWorkPlace) {
-//        this.lastWorkPlace = lastWorkPlace;
-//    }
-//
-//    public Integer getWorkPeriod() {
-//        return workPeriod;
-//    }
-//
-//    public void setWorkPeriod(Integer workPeriod) {
-//        this.workPeriod = workPeriod;
-//    }
-//
-//    public String getJobTitile() {
-//        return jobTitile;
-//    }
-//
-//    public void setJobTitile(String jobTitile) {
-//        this.jobTitile = jobTitile;
-//    }
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
 
 }

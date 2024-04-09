@@ -153,4 +153,23 @@ public class UserDAO implements UserDAOInterface {
         }
     }
 
+    @Override
+    public UserModel findByUsername(String username) {
+        try (Session session = HibernateSessionManager.openSession()) {
+
+            String hql = "from UserModel where username = :username";
+            Query<UserModel> query = session.createQuery(hql);
+            query.setParameter("username", username);
+            List<UserModel> list = query.list();
+            if (list.isEmpty()) {
+                return null;
+            } else {
+                return list.get(0);
+            }
+        } catch (Exception e) {
+            System.out.println("Исключение!" + e);
+            return null;
+        }
+    }
+
 }

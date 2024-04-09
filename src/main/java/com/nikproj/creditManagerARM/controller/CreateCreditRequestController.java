@@ -98,7 +98,7 @@ public class CreateCreditRequestController {
         user.setPhone("89171112233");
         user.setLastWorkPlace("Последнее место работы");
         user.setWorkPeriod(10);
-        user.setJobTitile("Должность");
+        user.setJobTitle("Должность");
 
         CreditRequestModel request = model.getRequest();
         request.setRequestedSum(Double.valueOf(12000));

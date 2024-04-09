@@ -18,6 +18,7 @@ public interface UserDAOInterface {
     
     Long saveUser(UserModel model, Session session);
     UserModel findById(Long id);
+    UserModel findByUsername(String username);
     List<UserModel> getAllUsers();
     List<UserModel> findByFIOPassportPhone(String firstName, String lastName, String patronymic, Integer passportSeria, Integer passportNumber, String phone); 
     List<UserModel> findByFIOPassport(String firstName, String lastName, String patronymic, Integer passportSeria, Integer passportNumber); 
