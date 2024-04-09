@@ -12,11 +12,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.Date;
+import lombok.Data;
 
 /**
  *
  * @author user
  */
+@Data
 @Entity
 @Table(name = "contracts")
 public class ContractModel {
@@ -42,44 +44,44 @@ public class ContractModel {
         WAIT, SIGNED, CANCELED
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public Date getContractDate() {
-        return contractDate;
-    }
-
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public Date getContractDate() {
+//        return contractDate;
+//    }
+//
     public String getStatus() {
         return status;
     }
-
-    public Date getSigningDate() {
-        return signingDate;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setContractDate(Date contractDate) {
-        this.contractDate = contractDate;
-    }
-
+//
+//    public Date getSigningDate() {
+//        return signingDate;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+//
+//    public void setContractDate(Date contractDate) {
+//        this.contractDate = contractDate;
+//    }
+//
     public void setStatus(Status status) {
         this.status = status.toString();
     }
-
-    public void setSigningDate(Date signingDate) {
-        this.signingDate = signingDate;
-    }
-
-    
-    public ApprovedRequestModel getApproveRequest() {
-        return approveRequest;
-    }
-
-    public void setApproveRequest(ApprovedRequestModel approveRequest) {
-        this.approveRequest = approveRequest;
-    }
+//
+//    public void setSigningDate(Date signingDate) {
+//        this.signingDate = signingDate;
+//    }
+//
+//    
+//    public ApprovedRequestModel getApproveRequest() {
+//        return approveRequest;
+//    }
+//
+//    public void setApproveRequest(ApprovedRequestModel approveRequest) {
+//        this.approveRequest = approveRequest;
+//    }
 }

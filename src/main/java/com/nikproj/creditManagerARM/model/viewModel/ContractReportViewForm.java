@@ -5,11 +5,15 @@
 package com.nikproj.creditManagerARM.model.viewModel;
 
 import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 /**
  *
  * @author user
  */
+@Data
+@AllArgsConstructor
 public class ContractReportViewForm {
 
     private Long id;
@@ -18,52 +22,52 @@ public class ContractReportViewForm {
     private String status;
     private Date signingDate;
 
-    public ContractReportViewForm(Long id, Long requestId, Date contractDate, String status, Date signingDate) {
-        this.id = id;
-        this.requestId = requestId;
-        this.contractDate = contractDate;
-        this.status = status;
-        this.signingDate = signingDate;
-    }
+//    public ContractReportViewForm(Long id, Long requestId, Date contractDate, String status, Date signingDate) {
+//        this.id = id;
+//        this.requestId = requestId;
+//        this.contractDate = contractDate;
+//        this.status = status;
+//        this.signingDate = signingDate;
+//    }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getRequestId() {
-        return requestId;
-    }
-
-    public void setRequestId(Long requestId) {
-        this.requestId = requestId;
-    }
-
-    public Date getContractDate() {
-        return contractDate;
-    }
-
-    public void setContractDate(Date contractDate) {
-        this.contractDate = contractDate;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Date getSigningDate() {
-        return signingDate;
-    }
-
-    public void setSigningDate(Date signingDate) {
-        this.signingDate = signingDate;
-    }
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+//
+//    public Long getRequestId() {
+//        return requestId;
+//    }
+//
+//    public void setRequestId(Long requestId) {
+//        this.requestId = requestId;
+//    }
+//
+//    public Date getContractDate() {
+//        return contractDate;
+//    }
+//
+//    public void setContractDate(Date contractDate) {
+//        this.contractDate = contractDate;
+//    }
+//
+//    public String getStatus() {
+//        return status;
+//    }
+//
+//    public void setStatus(String status) {
+//        this.status = status;
+//    }
+//
+//    public Date getSigningDate() {
+//        return signingDate;
+//    }
+//
+//    public void setSigningDate(Date signingDate) {
+//        this.signingDate = signingDate;
+//    }
 
 }

@@ -4,10 +4,13 @@
  */
 package com.nikproj.creditManagerARM.model.viewModel;
 
+import lombok.Data;
+
 /**
  *
  * @author user
  */
+@Data
 public class UserSearchCriteria {
 
     private String firstName = new String();
@@ -17,53 +20,53 @@ public class UserSearchCriteria {
     private String passportNumber = new String();
     private String phone = new String();
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPatronymic() {
-        return patronymic;
-    }
-
-    public void setPatronymic(String patronymic) {
-        this.patronymic = patronymic;
-    }
-
-    public String getPassportSeria() {
-        return passportSeria;
-    }
-
-    public void setPassportSeria(String passportSeria) {
-        this.passportSeria = passportSeria;
-    }
-
-    public String getPassportNumber() {
-        return passportNumber;
-    }
-
-    public void setPassportNumber(String passportNumber) {
-        this.passportNumber = passportNumber;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+//    public String getFirstName() {
+//        return firstName;
+//    }
+//
+//    public void setFirstName(String firstName) {
+//        this.firstName = firstName;
+//    }
+//
+//    public String getLastName() {
+//        return lastName;
+//    }
+//
+//    public void setLastName(String lastName) {
+//        this.lastName = lastName;
+//    }
+//
+//    public String getPatronymic() {
+//        return patronymic;
+//    }
+//
+//    public void setPatronymic(String patronymic) {
+//        this.patronymic = patronymic;
+//    }
+//
+//    public String getPassportSeria() {
+//        return passportSeria;
+//    }
+//
+//    public void setPassportSeria(String passportSeria) {
+//        this.passportSeria = passportSeria;
+//    }
+//
+//    public String getPassportNumber() {
+//        return passportNumber;
+//    }
+//
+//    public void setPassportNumber(String passportNumber) {
+//        this.passportNumber = passportNumber;
+//    }
+//
+//    public String getPhone() {
+//        return phone;
+//    }
+//
+//    public void setPhone(String phone) {
+//        this.phone = phone;
+//    }
 
     public boolean isEmpty() {
         return this.firstName.isEmpty()

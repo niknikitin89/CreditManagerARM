@@ -11,11 +11,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.Data;
 
 /**
  *
  * @author user
  */
+@Data
 @Entity
 @Table(name = "approved_request")
 public class ApprovedRequestModel {
@@ -32,36 +34,36 @@ public class ApprovedRequestModel {
     @Column(name = "approvedsum")
     private Double approvedSum;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public CreditRequestModel getCreditRequest() {
-        return creditRequest;
-    }
-
-    public void setCreditRequest(CreditRequestModel creditRequest) {
-        this.creditRequest = creditRequest;
-    }
-
-    public Integer getCreditTerm() {
-        return creditTerm;
-    }
-
-    public Double getApprovedSum() {
-        return approvedSum;
-    }
-
-    public void setCreditTerm(Integer creditTerm) {
-        this.creditTerm = creditTerm;
-    }
-
-    public void setApprovedSum(Double approvedSum) {
-        this.approvedSum = approvedSum;
-    }
-    
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+//
+//    public CreditRequestModel getCreditRequest() {
+//        return creditRequest;
+//    }
+//
+//    public void setCreditRequest(CreditRequestModel creditRequest) {
+//        this.creditRequest = creditRequest;
+//    }
+//
+//    public Integer getCreditTerm() {
+//        return creditTerm;
+//    }
+//
+//    public Double getApprovedSum() {
+//        return approvedSum;
+//    }
+//
+//    public void setCreditTerm(Integer creditTerm) {
+//        this.creditTerm = creditTerm;
+//    }
+//
+//    public void setApprovedSum(Double approvedSum) {
+//        this.approvedSum = approvedSum;
+//    }
+//    
 }
