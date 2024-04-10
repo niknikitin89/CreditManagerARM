@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 public interface UserDAOInterface {
     
     Long saveUser(UserModel model, Session session);
+    Long saveUser(UserModel model);
     UserModel findById(Long id);
     UserModel findByUsername(String username);
     List<UserModel> getAllUsers();

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymleaf.org">
+    <head>
+        <title>Регистрация</title>
+    </head>
+    <body>
+        <h1>Данные пользователя</h1>
+        <form method="POST" th:action="@{/register}"  id="registerForm">
+            <label for="username">Login</label>
+            <input type="text" th:field="username" 
+                   required="required"/>
+            <br/>
+            <label for="password">Password</label>
+            <input type="text" th:field="password" 
+                   required="required"/>
+            <br/>
+
+            <h5>ФИО</h5>
+            <label for="firstName">Имя</label>
+            <input type="text" th:field="firstName" 
+                   required="required"/>
+            <br/>
+
+            <label for="lastName">Фамилия</label>
+            <input type="text" th:field="lastName" 
+                   required="required"/>
+            <br/>
+
+            <label for="patronymic">Отчество</label>
+            <input type="text" th:field="patronymic" 
+                   required="required"/>
+            <br/>
+
+            <h5>Паспорт</h5>
+            <label for="passportSeria">Серия паспорта</label>
+            <input type="text" th:field="passportSeria" 
+                   pattern="[0-9]{4}" title="Формат: 0123"
+                   required="required"
+                   minlength="4"
+                   maxlength="4"/>
+            <br/>
+
+            <label for="passportNumber">Номер паспорта</label>
+            <input type="text" th:field="passportNumber" 
+                   pattern="[0-9]{6}" title="Формат: 012345"
+                   required="required"
+                   minlength="6"
+                   maxlength="6"/>
+            <br/><br/>
+
+            <input type="submit" value="Регистрация"/>
+        </form>
+
+        <br/>
+<!--        <form method="GET">
+            <input type="submit" value="Данные по умолчанию (для тестирования)" name = "default"/>
+        </form>
+
+        <br/>-->
+        <form method="POST">
+            <input type="submit" value="На главную" name = "home"/>
+        </form>
+    </body>
+</html>

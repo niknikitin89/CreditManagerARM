@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
@@ -27,6 +28,19 @@ public class UserDAO implements UserDAOInterface {
     public Long saveUser(UserModel model, Session session) {
         Long id = (Long) session.save(model);
         return id;
+    }
+
+    @Override
+    public Long saveUser(UserModel model) {
+        try (Session session = HibernateSessionManager.openSession()) {
+            Transaction transaction = session.beginTransaction();
+            Long id = (Long) session.save(model);
+            transaction.commit();
+            return id;
+        } catch (Exception e) {
+            System.out.println("Исключение!" + e);
+            return null;
+        }
     }
 
     @Override

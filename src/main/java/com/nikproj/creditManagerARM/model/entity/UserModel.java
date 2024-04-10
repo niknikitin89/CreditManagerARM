@@ -60,7 +60,19 @@ public class UserModel implements UserDetails{
     private String username;
     private String password;
     
-
+    public UserModel(String username, String password,
+            String firstName, String lastName, String patronymic,
+            Integer passportSeria, Integer passportNumber){
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.patronymic = patronymic;
+        this.passportSeria = passportSeria;
+        this.passportNumber = passportNumber;
+    }
+    
+    
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));

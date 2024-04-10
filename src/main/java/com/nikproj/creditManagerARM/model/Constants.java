@@ -13,7 +13,9 @@ public interface Constants {
     
     //URL страниц приложения
     String PAGE_URL_HOME = "/cmarm";
+    String PAGE_URL_LOGIN = "/cmarm/login";
     String PAGE_URL_CREATE_REQUEST = "/cmarm/create_credit_request";
+    String PAGE_URL_REGISTRATION = "/cmarm/registration";
     String PAGE_URL_REPORT_ALL_USERS = "/cmarm/all_users";
     String PAGE_URL_SEARCH_USER = "/cmarm/user_search";
     String PAGE_URL_REPORT_ALL_REQUESTS = "/cmarm/all_requests";
