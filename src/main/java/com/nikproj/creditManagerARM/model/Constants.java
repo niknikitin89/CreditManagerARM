@@ -9,6 +9,8 @@ package com.nikproj.creditManagerARM.model;
  * @author user
  */
 public interface Constants {
+
+
     String ERR_SAVE_DATABASE = "Ошибка сохранения в БД";
     
     //URL страниц приложения
@@ -31,6 +33,7 @@ public interface Constants {
     String PAGE_NAME_CONTRACT = "contract";
     String PAGE_NAME_CREATE_REQUEST = "createCreditRequest";
     String PAGE_NAME_HOME = "homePage";
+    String PAGE_NAME_LOGIN = "login";
     String PAGE_NAME_REQUEST_APPROVED = "requestApproved";
     String PAGE_NAME_REQUEST_REJECTED = "requestRejected";
     String PAGE_NAME_USER_LIST = "userList";

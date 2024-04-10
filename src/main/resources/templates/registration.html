@@ -12,33 +12,33 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <h1>Данные пользователя</h1>
         <form method="POST" th:action="@{/register}"  id="registerForm">
             <label for="username">Login</label>
-            <input type="text" th:field="username" 
+            <input type="text" name="username" 
                    required="required"/>
             <br/>
             <label for="password">Password</label>
-            <input type="text" th:field="password" 
+            <input type="text" name="password" 
                    required="required"/>
             <br/>
 
             <h5>ФИО</h5>
             <label for="firstName">Имя</label>
-            <input type="text" th:field="firstName" 
+            <input type="text" name="firstName" 
                    required="required"/>
             <br/>
 
             <label for="lastName">Фамилия</label>
-            <input type="text" th:field="lastName" 
+            <input type="text" name="lastName" 
                    required="required"/>
             <br/>
 
             <label for="patronymic">Отчество</label>
-            <input type="text" th:field="patronymic" 
+            <input type="text" name="patronymic" 
                    required="required"/>
             <br/>
 
             <h5>Паспорт</h5>
             <label for="passportSeria">Серия паспорта</label>
-            <input type="text" th:field="passportSeria" 
+            <input type="text" name="passportSeria" 
                    pattern="[0-9]{4}" title="Формат: 0123"
                    required="required"
                    minlength="4"
@@ -46,7 +46,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <br/>
 
             <label for="passportNumber">Номер паспорта</label>
-            <input type="text" th:field="passportNumber" 
+            <input type="text" name="passportNumber" 
                    pattern="[0-9]{6}" title="Формат: 012345"
                    required="required"
                    minlength="6"

@@ -79,19 +79,18 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain finterChain(HttpSecurity http) throws Exception {
         return http
-                .authorizeHttpRequests(
-                        (request) -> {
-                            request.requestMatchers(Constants.PAGE_URL_CREATE_REQUEST)
-                                    .hasRole("USER");
-                        }
-                )//Задаем URL и описываем необходимые роли для доступа к нему
+                .authorizeHttpRequests((request) -> {
+                    request.requestMatchers(Constants.PAGE_URL_CREATE_REQUEST)
+                            .hasRole("USER");
+                })//Задаем URL и описываем необходимые роли для доступа к нему
                 //В данном случае нужна роль ROLE_USER
-                .authorizeHttpRequests(
-                        (request) -> {
-                            request.requestMatchers("/**")
-                                    .permitAll();
-                        }//Всем остальным URL даем полный доступ
-                )
+                .authorizeHttpRequests((request) -> {
+                    request.requestMatchers("/**")
+                            .permitAll();
+                })//Всем остальным URL даем полный доступ
+                .formLogin((form) -> {
+                    form.loginPage(Constants.PAGE_URL_LOGIN);
+                })//Указываем страницу авторизации
                 .build();
     }
 
